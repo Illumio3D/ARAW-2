@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARAW exam trainer</title>
+<style>
+:root{
+  --paper:#F3F4EF; --sheet:#FFFFFF; --text:#23262B; --muted:#646a73; --rule:#D8DBD2; --rule2:#E8EAE3;
+  --ink:#2541A6; --ink-soft:#E7ECFA; --red:#B8322A; --red-soft:#F9E6E4; --green:#2C7A4B; --green-soft:#E3F2E8;
+  --hl:#FFE24D; --hl-soft:rgba(255,226,77,.55); --amber:#9A6A00;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--text);font:15px/1.55 var(--sans)}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+a{color:var(--ink)}
+h1,h2,h3{line-height:1.25;margin:0}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.top{background:var(--sheet);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;gap:28px;height:58px}
+.brand{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand span{color:var(--ink)}
+.nav{display:flex;gap:4px}
+.nav button{background:none;border:0;padding:8px 12px;border-radius:var(--r);cursor:pointer;color:var(--muted);font-weight:500}
+.nav button:hover{color:var(--text);background:var(--paper)}
+.nav button.on{color:var(--ink);background:var(--ink-soft)}
+
+main{padding:28px 0 80px}
+.lead{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.h-page{font-family:var(--serif);font-size:30px;font-weight:700}
+.section{margin-top:34px}
+.section > h2{font-size:17px;margin-bottom:12px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:var(--sheet);padding:8px 14px;border-radius:var(--r);cursor:pointer;font-weight:500;white-space:nowrap}
+.btn:hover{border-color:#b9bdb2}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.primary:hover{background:#1d3488}
+.btn.quiet{border-color:transparent;background:transparent;color:var(--muted)}
+.btn.quiet:hover{color:var(--text);background:var(--rule2)}
+.btn.danger{color:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{padding:5px 10px;font-size:13.5px}
+
+/* exam list */
+.progressline{display:flex;flex-wrap:wrap;gap:28px;margin-top:22px;padding:16px 20px;background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r)}
+.progressline b{display:block;font-size:22px;font-family:var(--serif)}
+.progressline span{color:var(--muted);font-size:13.5px}
+.exlist{border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet)}
+.exrow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:16px 20px;border-top:1px solid var(--rule2);align-items:center}
+.exrow:first-child{border-top:0}
+.exrow h3{font-size:16px;display:flex;align-items:center;gap:10px}
+.exrow .meta{color:var(--muted);font-size:13.5px;margin-top:3px}
+.exrow .acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:20px;background:var(--rule2);color:var(--muted)}
+.tag.done{background:var(--green-soft);color:var(--green)}
+.tag.prog{background:#FFF4CC;color:var(--amber)}
+.tag.ink{background:var(--ink-soft);color:var(--ink)}
+.score-badge{font-family:var(--serif);font-weight:700;color:var(--text);font-size:15px}
+.newexam{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:18px 20px;border:1px dashed #b9bdb2;border-radius:var(--r);margin-top:14px}
+.newexam p{margin:0;color:var(--muted);max-width:62ch;font-size:14px}
+
+/* exam bar */
+#bar{position:sticky;top:58px;z-index:15}
+.exambar{background:var(--paper);border-bottom:1px solid var(--rule)}
+.exambar .wrap{display:flex;align-items:center;gap:16px;height:54px}
+.exambar .title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exambar .mode{font-size:12.5px;color:var(--muted)}
+.tabs{display:flex;gap:2px;margin-left:auto}
+.tabs button{border:1px solid transparent;background:none;padding:6px 12px;border-radius:var(--r);cursor:pointer;color:var(--muted);font-weight:500}
+.tabs button.on{background:var(--sheet);border-color:var(--rule);color:var(--text)}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:17px;min-width:64px;text-align:right}
+.timer.low{color:var(--red)}
+
+/* sheet */
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:26px 28px;margin-top:18px}
+.parthead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-top:8px}
+.parthead h2{font-family:var(--serif);font-size:24px}
+.parthead .pts{color:var(--muted)}
+.rules{color:var(--muted);font-size:14px;margin:8px 0 0;max-width:72ch}
+
+/* part A */
+.aset h3{font-family:var(--serif);font-size:19px;display:flex;gap:12px;align-items:baseline}
+.aset h3 small{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500}
+.mtx{width:100%;border-collapse:collapse;margin-top:12px;font-family:var(--serif);font-size:16px}
+.mtx th{font:600 12.5px var(--sans);color:var(--muted);text-align:center;padding:6px 4px;border-bottom:1px solid var(--rule)}
+.mtx th:first-child,.mtx th:nth-child(2){text-align:left}
+.mtx td{border-bottom:1px solid var(--rule2);padding:12px 6px;vertical-align:top;line-height:1.5}
+.mtx td.l{width:28px;color:var(--muted);font-family:var(--sans);font-weight:600}
+.mtx td.bx{width:84px;text-align:center;vertical-align:middle}
+.box{width:30px;height:30px;border:1.5px solid #8d929a;border-radius:3px;background:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.box:hover:not(:disabled){border-color:var(--ink)}
+.box svg{width:22px;height:22px}
+.box:disabled{cursor:default}
+.box.key{border-color:var(--green);border-width:2.5px}
+.box.wrongpick{border-color:var(--red);background:var(--red-soft)}
+tr.st-ok td{background:#F5FAF7} tr.st-bad td{background:#FDF6F5}
+tr.st-ok td.l{box-shadow:inset 3px 0 var(--green);color:var(--green)} tr.st-bad td.l{box-shadow:inset 3px 0 var(--red);color:var(--red)}
+.mtx td.l{padding-left:10px}
+.expl{font-family:var(--sans);font-size:14.5px;line-height:1.6;margin-top:8px;padding:12px 16px;background:#24305A;color:#EEF1F9;border-left:5px solid #9FB0E0;border-radius:6px}
+.expl.ok{border-left-color:#6FD09A} .expl.bad{border-left-color:#F2877B}
+.expl b{font-weight:600;color:#fff}
+.yourexpl{font-family:var(--sans);font-size:14px;margin-top:8px;padding:9px 12px;background:var(--ink-soft);border-left:3px solid var(--ink);border-radius:0 4px 4px 0}
+.sol{display:flex;gap:8px;align-items:flex-start;font:14px/1.5 var(--sans);margin-top:8px}
+.sol .sm{font-weight:700;width:18px;flex:none}
+.sol.ok .sm{color:var(--green)} .sol.bad .sm{color:var(--red)}
+.sol.bad b{color:var(--red)} .sol.ok b{color:var(--green)}
+.sol .key{margin-top:4px;color:var(--text)}
+.pending{align-self:center;color:var(--muted);font-size:13px;margin-right:6px}
+.setting{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;color:var(--muted);max-width:72ch;cursor:pointer}
+.setting input{width:16px;height:16px;margin-top:3px;accent-color:var(--ink)}
+.setting b{color:var(--text);font-weight:600}
+details.why summary{display:inline-flex;align-items:center;gap:7px;cursor:pointer;list-style:none;margin-top:8px;padding:4px 13px 4px 10px;border:1px solid #c9cfe6;border-radius:20px;background:#fff;font:500 13px var(--sans);color:var(--ink)}
+details.why summary:hover{background:var(--ink-soft);border-color:var(--ink)}
+details.why summary::-webkit-details-marker{display:none}
+details.why summary:before{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.why .hd{display:none} details.why[open] .hd{display:inline} details.why[open] .sh{display:none}
+details.why[open] summary:before{transform:rotate(45deg) translate(-1px,-1px)}
+.ascore{display:flex;gap:20px;justify-content:flex-end;margin-top:12px;font-size:14px;color:var(--muted)}
+.ascore b{color:var(--text)}
+.ascore .tot{font-weight:700;color:var(--text)}
+details.vol{margin-top:12px}
+details.vol summary{cursor:pointer;color:var(--muted);font-size:13.5px}
+.vol textarea{width:100%;min-height:44px;margin-top:6px}
+textarea{border:1px solid var(--rule);border-radius:4px;padding:8px 10px;background:#fff;resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--ink);outline:none}
+.inkfont{font-family:var(--serif);color:var(--ink)}
+.rowacts{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+
+/* part B */
+.paper{font-family:"Times New Roman",Times,var(--serif);font-size:16.5px;line-height:1.85;color:#111;background:#fff;border:1px solid var(--rule);box-shadow:0 1px 0 var(--rule2),0 8px 0 -4px var(--rule2);padding:38px 46px;margin-top:16px;max-width:780px}
+.paper .h1{font-weight:700;font-size:18px;margin:6px 0 10px}
+.paper .h2{font-weight:700;font-size:16.5px;margin:16px 0 6px}
+.paper p{margin:0 0 12px;text-align:justify}
+.paper .note{font-style:italic;color:#555;margin-bottom:4px}
+.paper .toc{display:flex;gap:8px}
+.paper .toc .t{flex:0 1 auto}
+.paper .toc .lead{flex:1;border-bottom:1px dotted #999;margin:0 4px 8px;min-width:20px}
+.paper .center{text-align:center;margin:0 0 8px}
+.paper .fig{border:1px solid #999;height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#555;font-style:italic;padding:12px;margin:8px 0 6px;background:repeating-linear-gradient(135deg,#fafafa 0 8px,#f2f2f2 8px 16px)}
+.paper .cap{font-size:14.5px;color:#333;margin:0 0 14px}
+.paper table{border-collapse:collapse;margin:6px 0;font-size:15px}
+.paper td{border:1px solid #999;padding:3px 12px}
+.paper tr:first-child td{font-weight:700}
+.w{cursor:pointer;border-radius:2px;transition:background .12s}
+.paper.live .w:hover{background:#FFF7C2}
+.w.mk{background:var(--hl-soft);box-shadow:0 0 0 1px rgba(214,180,0,.35)}
+.fn{font:700 11px var(--sans);color:var(--ink);vertical-align:super;margin-left:1px}
+.w.e-found{background:#CDEBD7}
+.w.e-missed{background:#F6D3CF;text-decoration:underline wavy var(--red) 1px;text-underline-offset:4px}
+.w.e-false{background:#ECECEC;text-decoration:line-through #888}
+.notes{margin-top:18px}
+.noterow{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;margin-top:10px}
+.noterow .n{font:700 14px var(--sans);color:var(--ink);padding-top:8px}
+.noterow .q{font-family:var(--serif);font-size:14px;color:var(--muted);margin-bottom:4px}
+.noterow textarea{width:100%;min-height:42px}
+.berr{border-top:1px solid var(--rule2);padding:14px 0;display:grid;grid-template-columns:96px 1fr;gap:14px}
+.berr:first-child{border-top:0}
+.berr .st{font-size:12.5px;font-weight:700}
+.berr .st.f{color:var(--green)} .berr .st.m{color:var(--red)}
+.berr h4{margin:0;font-size:15px}
+.berr .txt{font-family:var(--serif);font-size:14px;color:var(--muted);margin:2px 0 6px}
+.berr .ex{font-size:14px}
+.berr .yours{font-size:13.5px;color:var(--ink);margin-top:6px;font-family:var(--serif)}
+.grade{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.grade button{border:1px solid var(--rule);background:#fff;border-radius:20px;padding:3px 11px;font-size:13px;cursor:pointer}
+.grade button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+
+/* part C */
+.info{font-family:var(--serif);font-size:15.5px;line-height:1.65;background:#FBFBF8;border:1px solid var(--rule);border-radius:var(--r);padding:16px 20px;margin-top:14px}
+.info h4{font-family:var(--sans);font-size:14px;margin:0 0 6px}
+.info p{margin:0 0 10px}
+.info .src{font-size:13px;color:var(--muted);margin:0}
+.topicline{font-family:var(--serif);font-size:20px;font-weight:700;margin-top:6px}
+.task{margin-top:24px}
+.task .q{font-family:var(--serif);font-size:16px}
+.task .q b{font-family:var(--sans)}
+.task textarea{width:100%;min-height:180px;margin-top:8px;font-family:var(--serif);font-size:15.5px;color:var(--ink)}
+.task .cnt{font-size:12.5px;color:var(--muted);text-align:right}
+.model{margin-top:12px;border:1px solid #24305A;border-radius:var(--r);overflow:hidden}
+.model .mh{background:#24305A;padding:9px 16px;font-weight:600;font-size:14px;color:#fff}
+.model pre{white-space:pre-wrap;margin:0;padding:16px;font-family:var(--serif);font-size:15px;line-height:1.6;background:#E6EAF5;color:#1B2340}
+.rubric{border-top:1px solid var(--rule);padding:12px 14px;background:#FCFCFA}
+.rubric h5{margin:0 0 8px;font-size:13.5px}
+.rubric label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer;font-size:14px}
+.rubric input{margin-top:3px;width:16px;height:16px;accent-color:var(--ink)}
+.rubric .p{margin-left:auto;color:var(--muted);white-space:nowrap;padding-left:12px}
+.rubric .sum{font-weight:700;text-align:right;margin-top:6px}
+
+/* review summary */
+.summary{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:20px 24px;margin-top:18px}
+.ring{width:112px;height:112px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif)}
+.ring .v b{font-size:30px;line-height:1}
+.ring .v span{font-size:13px;color:var(--muted)}
+.parts3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.parts3 div{border-left:3px solid var(--rule);padding-left:12px}
+.parts3 b{font-family:var(--serif);font-size:20px}
+.parts3 span{display:block;font-size:13px;color:var(--muted)}
+.hint{font-size:13.5px;color:var(--muted);margin-top:12px}
+.banner{background:#FFF4CC;border:1px solid #EBD58A;color:#5c4500;padding:10px 14px;border-radius:var(--r);margin-top:14px;font-size:14px}
+
+/* concept panel */
+#app.wide,.exambar .wrap.wide{max-width:1400px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:28px;align-items:start}
+.maincol{min-width:0}
+.cpanel{position:sticky;top:var(--ptop);margin-top:18px;max-height:calc(100vh - var(--ptop) - 16px);display:flex;flex-direction:column;background:#fff;border:1px solid #c3cae3;border-radius:10px;overflow:hidden}
+.cphead{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#24305A;color:#fff;padding:10px 12px 10px 16px;font-weight:600;font-size:14px}
+.cpx{background:transparent;border:0;color:#fff;font-size:24px;line-height:1;width:36px;height:36px;border-radius:6px;cursor:pointer}
+.cpx:hover{background:rgba(255,255,255,.12)}
+.cptabs{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:#EEF1F8;border-bottom:1px solid #d6dcee}
+.cptabs button{border:1px solid #c3cae3;background:#fff;border-radius:16px;padding:4px 11px;font-size:12.5px;cursor:pointer;color:var(--text)}
+.cptabs button.on{background:#24305A;border-color:#24305A;color:#fff}
+.cpbody{overflow:auto;padding:16px 18px 24px;overscroll-behavior:contain}
+.cmeta{font-size:12.5px;color:var(--muted)}
+.ctitle{font-family:var(--serif);font-size:21px;margin:2px 0 8px}
+.cintro{font-size:14.5px;color:#3a3f48;margin:0 0 6px}
+.csec{border-top:1px solid var(--rule2);padding-top:12px;margin-top:14px}
+.csec h4{font-size:14.5px;margin:0 0 6px;color:#24305A}
+.csec p{font-size:14px;margin:0 0 8px}
+.citems{margin:0}
+.ci{padding:7px 0}
+.ci dt{font-weight:600;font-size:14px}
+.ci dd{margin:2px 0 0;font-size:14px;color:#2e333b}
+.cex{margin-top:5px;padding:6px 10px;background:#EEF1F8;border-radius:5px;font-family:var(--serif);font-size:14px;color:#1B2340}
+.cex span{display:block;font:600 11.5px var(--sans);color:#5a6488;margin-bottom:1px}
+.ctip{margin-top:10px;padding:9px 12px;background:#FFF6D6;border:1px solid #EFD98C;border-radius:6px;font-size:13.5px}
+.ctip b{color:#6b5200;margin-right:4px}
+.cbtn{margin-left:auto;font-family:var(--sans)}
+.parthead .pts{display:flex;align-items:center;gap:10px}
+/* concept library */
+.clib{display:grid;grid-template-columns:270px minmax(0,1fr);gap:24px;margin-top:20px;align-items:start}
+.cindex{position:sticky;top:76px;max-height:calc(100vh - 92px);overflow:auto;background:#fff;border:1px solid var(--rule);border-radius:var(--r);padding:8px}
+.cgroup{padding:6px 4px 8px}
+.cgh{font-size:12.5px;font-weight:600;color:var(--muted);padding:2px 8px 4px}
+.cindex button{display:block;width:100%;text-align:left;border:0;background:none;padding:6px 8px;border-radius:5px;cursor:pointer;font-size:14px}
+.cindex button:hover{background:var(--paper)}
+.cindex button.on{background:#24305A;color:#fff}
+.ccard{margin-top:0}
+@media (max-width:1180px){
+  .layout{display:block}
+  .cpanel{position:fixed;top:0;right:0;bottom:0;width:min(440px,94vw);max-height:none;margin:0;border-radius:0;z-index:60;box-shadow:-14px 0 40px rgba(20,26,45,.25)}
+}
+@media (max-width:820px){ .clib{grid-template-columns:1fr}.cindex{position:static;max-height:none} }
+
+/* dialogs */
+.modal{position:fixed;inset:0;background:rgba(20,26,45,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.mbox{background:#fff;border-radius:10px;max-width:520px;width:100%;padding:22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mbox h3{font-size:18px;margin-bottom:8px}.mbox p{margin:0 0 14px}
+.mrow{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.btn.warn{background:var(--red);border-color:var(--red)}
+.bk{width:100%;height:120px;font:12px/1.4 ui-monospace,Menlo,monospace;margin-bottom:12px}
+
+/* stats */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+.tile{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px}
+.tile b{font-family:var(--serif);font-size:26px;display:block;line-height:1.2}
+.tile span{color:var(--muted);font-size:13px}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:18px 20px}
+.bars .row{display:grid;grid-template-columns:230px 1fr 110px;gap:12px;align-items:center;padding:5px 0;font-size:14px}
+.bars .track{height:12px;background:var(--rule2);border-radius:6px;overflow:hidden}
+.bars .fill{height:100%;border-radius:6px}
+.bars .val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.core-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);margin-left:6px;vertical-align:1px}
+.miss{border-top:1px solid var(--rule2);padding:12px 0}
+.miss:first-child{border-top:0}
+.miss .s{font-family:var(--serif)}
+.miss .m{font-size:12.5px;color:var(--muted);margin:2px 0 4px}
+.empty{color:var(--muted);font-size:14px;padding:6px 0}
+.chartwrap svg{width:100%;height:auto;display:block}
+
+/* practice */
+.chgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-top:12px}
+.chk{display:flex;gap:10px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;cursor:pointer;font-size:14px}
+.chk input{width:16px;height:16px;accent-color:var(--ink)}
+.chk .acc{margin-left:auto;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.drillhead{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:10px;margin-top:26px;flex-wrap:wrap}
+
+@media (max-width:720px){
+  .wrap{padding:0 14px}
+  .top .wrap{gap:10px}.brand{font-size:16px}.nav button{padding:6px 8px}
+  .exrow{grid-template-columns:1fr}.exrow .acts{justify-content:flex-start}
+  .sheet{padding:18px}.paper{padding:22px 18px}
+  .summary{grid-template-columns:1fr}.parts3{grid-template-columns:1fr}
+  .bars .row{grid-template-columns:1fr 70px}.bars .row .track{grid-column:1/3;grid-row:2}
+  .exambar .title,.exambar .mode{display:none}
+  .brand span{display:none}
+  .exambar .wrap{gap:6px}.timer{font-size:15px;min-width:50px}
+  .nav button,.tabs button{white-space:nowrap;font-size:13.5px}
+  .tabs button{padding:6px 8px}
+  .mtx td.bx{width:44px;padding:12px 2px}.mtx th{font-size:11px}
+  .box{width:26px;height:26px}
+  .mtx{font-size:15px}
+  .berr{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">ARAW <span>exam trainer</span></div>
+  <nav class="nav" id="nav">
+    <button data-act="nav" data-v="home">Exams</button>
+    <button data-act="nav" data-v="practice">Chapter practice</button>
+    <button data-act="nav" data-v="concepts">Concepts</button>
+    <button data-act="nav" data-v="stats">Statistics</button>
+  </nav>
+</div></header>
+<div id="bar"></div>
+<main><div class="wrap" id="app"></div></main>
+
+<script src="araw_data.js"></script>
+<script>
+"use strict";
+/* ================================================================
+   ARAW exam trainer – app logic
+   Data comes from araw_data.js (window.ARAW_DATA).
+   Progress is stored in the browser (localStorage).
+   ================================================================ */
+const app = document.getElementById('app'), bar = document.getElementById('bar');
+if (!window.ARAW_DATA) {
+  app.innerHTML = '<div class="sheet"><h2>The question file could not be loaded</h2><p>Keep <b>araw_data.js</b> in the same folder as this HTML file and reload the page.</p></div>';
+  throw new Error('ARAW_DATA missing');
+}
+const D = window.ARAW_DATA;
+const SETS = Object.fromEntries(D.partA.map(s => [s.id, s]));
+const PAGES = Object.fromEntries(D.partB.map(p => [p.id, p]));
+const CASES = Object.fromEntries(D.partC.map(c => [c.id, c]));
+const CORE = D.coreChapters, BASIC = [1, 2, 3, 5, 6];
+const AIM = {function:'functional aim', causal:'causal connection', intention:'intention', comparison:'comparison', description:'description'};
+const EXAM_SECONDS = 60 * 60;
+
+/* ---------- storage ---------- */
+const KEY = 'araw-trainer-v1';
+function blank(){ return {attempts:[], inprog:{}, generated:[], stmt:{}, bstat:{}, settings:{holdBack:false}}; }
+let S;
+try { S = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e){ S = blank(); }
+if (!S.settings) S.settings = {holdBack:false};
+let saveTimer = null;
+function save(now){
+  clearTimeout(saveTimer);
+  const doSave = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){ console.warn('save failed', e); } };
+  if (now) doSave(); else saveTimer = setTimeout(doSave, 400);
+}
+
+/* ---------- in-page dialogs (browser confirm/alert are blocked in the hosted version) ---------- */
+function modal(html, handlers){
+  const d = document.createElement('div'); d.className = 'modal';
+  d.innerHTML = `<div class="mbox" role="dialog" aria-modal="true">${html}</div>`;
+  const close = () => { d.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  d.addEventListener('click', e => {
+    if (e.target === d) return close();
+    const b = e.target.closest('[data-m]'); if (!b) return;
+    const h = handlers[b.dataset.m]; if (!h || h(d) !== false) close();
+  });
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(d);
+  const f = d.querySelector('[data-focus]') || d.querySelector('.btn.primary'); if (f) f.focus();
+  return d;
+}
+function ask(msg, ok, danger){
+  return new Promise(res => modal(`<p>${esc(msg)}</p><div class="mrow"><button class="btn" data-m="no">Cancel</button><button class="btn primary ${danger ? 'warn' : ''}" data-m="yes">${esc(ok || 'OK')}</button></div>`,
+    {yes: () => res(true), no: () => res(false)}));
+}
+function note(msg){ modal(`<p>${esc(msg)}</p><div class="mrow"><button class="btn primary" data-m="ok">OK</button></div>`, {ok: () => {}}); }
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const fmtTime = s => { s = Math.max(0, Math.round(s)); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+const fmtDate = t => new Date(t).toLocaleDateString(undefined, {day:'numeric', month:'short'}) + ', ' + new Date(t).toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'});
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+const LET = ['a', 'b', 'c'];
+const CROSS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5 Q12 12.5 19.2 18.6 M18.6 5 Q12.4 11 5.4 19" fill="none" stroke="#2541A6" stroke-width="2.6" stroke-linecap="round"/></svg>';
+const allExams = () => D.exams.concat(S.generated);
+const examById = id => allExams().find(e => e.id === id);
+
+/* ---------- Part B tokenizer: turns page text into clickable words ---------- */
+const pageCache = {};
+function tokenize(page){
+  if (pageCache[page.id]) return pageCache[page.id];
+  let n = 0; const wordErr = {}, wordText = {};
+  function words(str, err){
+    // str: plain text that may contain <b>, </b>, <i>, </i>
+    return str.split(/(<\/?[bi]>)/).map(part => {
+      if (/^<\/?[bi]>$/.test(part)) return part;
+      return part.split(/(\s+)/).map(w => {
+        if (!w) return '';
+        if (/^\s+$/.test(w)) return ' ';
+        const k = 'w' + (n++); wordText[k] = w; if (err) wordErr[k] = err;
+        return `<span class="w" data-k="${k}">${esc(w)}</span>`;
+      }).join('');
+    }).join('');
+  }
+  function line(x){
+    if (!x) return '';
+    let out = '', last = 0; const re = /\[\[([a-z0-9_]+)\|([^\]]*)\]\]/g; let m;
+    while ((m = re.exec(x))) { out += words(x.slice(last, m.index), null) + words(m[2], m[1]); last = re.lastIndex; }
+    return out + words(x.slice(last), null);
+  }
+  const html = page.blocks.map(b => {
+    switch (b.k) {
+      case 'h1': return `<div class="h1">${line(b.x)}</div>`;
+      case 'h2': return `<div class="h2">${line(b.x)}</div>`;
+      case 'note': return `<div class="note">${line(b.x)}</div>`;
+      case 'center': return `<p class="center">${line(b.x)}</p>`;
+      case 'fig': return `<div class="fig">${esc(b.x)}</div>`;
+      case 'cap': return `<p class="cap">${line(b.x)}</p>`;
+      case 'toc': return `<div class="toc" style="padding-left:${(b.i || 0) * 28}px"><span class="t">${line(b.x)}</span>${b.pg ? '<span class="lead"></span><span>' + line(b.pg) + '</span>' : ''}</div>`;
+      case 'table': return `<table>${b.rows.map(r => '<tr>' + r.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('')}</table>`;
+      default: return `<p>${line(b.x)}</p>`;
+    }
+  }).join('');
+  return (pageCache[page.id] = {html, wordErr, wordText});
+}
+
+/* ---------- attempts ---------- */
+function newAttempt(exam, mode){
+  const order = {}; exam.partA.forEach(id => order[id] = shuffle([0, 1, 2]));
+  const a = {}; exam.partA.forEach(id => a[id] = {ans:{}, expl:{}, checked:false});
+  return {
+    id:'t' + Date.now(), examId:exam.id, title:exam.title, mode, started:Date.now(), elapsed:0,
+    def:{partA:exam.partA.slice(), order, partB:exam.partB, partC:exam.partC},
+    a, b:{marks:[], notes:{}, checked:false, grades:{}},
+    c:{ans:['', '', ''], shown:[false, false, false], rub:[[], [], []]},
+    done:false, part:'A', holdBack: mode === 'exam' && !!S.settings.holdBack
+  };
+}
+/* solutions per block unless the attempt holds them back until hand-in */
+const canCheck = t => !t.done && !t.holdBack;
+
+/* explanations start with ‘Correct.’ / ‘False.’ – the solution line already says this */
+const stripVerdict = e => e.replace(/^(Correct|False)\.\s*/, '');
+
+function scoreA(t){ let pts = 0, max = 0; t.def.partA.forEach(id => { const r = setResult(t, id); pts += r.total; max += 5; }); return {pts, max}; }
+function setResult(t, id){
+  const set = SETS[id], st = t.a[id]; let ok = 0;
+  set.s.forEach((x, i) => { if (st.ans[i] === x.a) ok++; });
+  return {ok, bonus: ok === 3 ? 2 : 0, total: ok + (ok === 3 ? 2 : 0)};
+}
+function bResult(t){
+  const tok = tokenize(PAGES[t.def.partB]); const found = new Set(), falseMarks = [];
+  t.b.marks.forEach(k => { const e = tok.wordErr[k]; if (e) found.add(e); else falseMarks.push(k); });
+  let pts = 0; found.forEach(e => pts += (t.b.grades[e] || 1));
+  return {found, falseMarks, pts:Math.min(10, pts)};
+}
+function cTaskPts(t, i){ const task = CASES[t.def.partC].tasks[i]; return task.rubric.reduce((s, r, j) => s + (t.c.rub[i][j] ? r.p : 0), 0); }
+function scoreAll(t){
+  const A = scoreA(t).pts, B = t.b.checked ? bResult(t).pts : 0;
+  const C = [0, 1, 2].reduce((s, i) => s + (t.c.shown[i] ? cTaskPts(t, i) : 0), 0);
+  return {A, B, C, total:A + B + C};
+}
+
+/* statistics bookkeeping when a set / page is checked */
+function recordSet(t, id){
+  const set = SETS[id], st = t.a[id];
+  set.s.forEach((x, i) => {
+    const k = id + ':' + i, r = S.stmt[k] || (S.stmt[k] = {n:0, w:0, last:null});
+    const ok = st.ans[i] === x.a; r.n++; if (!ok) r.w++; r.last = ok;
+  });
+}
+function recordB(t){
+  const page = PAGES[t.def.partB], res = bResult(t);
+  Object.keys(page.errors).forEach(e => { const r = S.bstat[e] || (S.bstat[e] = {n:0, f:0}); r.n++; if (res.found.has(e)) r.f++; });
+}
+
+/* ---------- view state ---------- */
+let view = {name:'home'};
+let cur = null;          // current attempt (exam view)
+let drill = null;        // chapter practice session
+let tick = null;
+let panel = null;        // concept panel: {cards:[ids], active:id, label}
+const CONCEPTS = Object.fromEntries((D.concepts || []).map(c => [c.id, c]));
+const CMAP = D.conceptMap || {sets:{}, pages:{}, cases:{}};
+
+function go(name, extra){
+  view = Object.assign({name}, extra || {});
+  if (name !== 'exam') { cur = null; stopTimer(); }
+  panel = null;
+  render(); window.scrollTo(0, 0);
+}
+function render(){
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.v === (view.name === 'exam' ? 'home' : view.name === 'drill' ? 'practice' : view.name)));
+  const withPanel = !!panel && (view.name === 'exam' || view.name === 'drill');
+  bar.innerHTML = view.name === 'exam' ? examBar() : '';
+  const bw = bar.querySelector('.wrap'); if (bw) bw.classList.toggle('wide', withPanel);
+  const content = ({home:viewHome, exam:viewExam, practice:viewPractice, drill:viewDrill, stats:viewStats, concepts:viewConcepts})[view.name]();
+  app.classList.toggle('wide', withPanel || view.name === 'concepts');
+  app.innerHTML = withPanel ? `<div class="layout" style="--ptop:${view.name === 'exam' ? 124 : 72}px"><div class="maincol">${content}</div>${panelHtml()}</div>` : content;
+}
+
+/* ================= CONCEPT CARDS ================= */
+function cardHtml(c){
+  return `<div class="cmeta">Chapter ${c.ch}: ${esc(D.chapters[c.ch])}</div><h3 class="ctitle">${esc(c.title)}</h3>
+    ${c.intro ? `<p class="cintro">${esc(c.intro)}</p>` : ''}
+    ${c.sections.map(sec => `<section class="csec"><h4>${esc(sec.h)}</h4>
+      ${sec.p ? `<p>${esc(sec.p)}</p>` : ''}
+      ${sec.items ? `<dl class="citems">${sec.items.map(([t, d, ex]) => `<div class="ci"><dt>${esc(t)}</dt><dd>${esc(d)}${ex ? `<div class="cex"><span>Example</span>${esc(ex)}</div>` : ''}</dd></div>`).join('')}</dl>` : ''}
+      ${sec.tip ? `<div class="ctip"><b>Exam tip</b> ${esc(sec.tip)}</div>` : ''}</section>`).join('')}`;
+}
+function openPanel(ids, label){
+  ids = (ids || []).filter(id => CONCEPTS[id]); if (!ids.length) return;
+  panel = {cards:ids, active:ids[0], label};
+}
+function panelHtml(){
+  const c = CONCEPTS[panel.active];
+  return `<aside class="cpanel" aria-label="Concept review">
+    <div class="cphead"><span>Concepts behind ${esc(panel.label)}</span><button class="cpx" data-act="pclose" aria-label="Close concept panel">×</button></div>
+    ${panel.cards.length > 1 ? `<div class="cptabs" role="tablist">${panel.cards.map(id => `<button role="tab" aria-selected="${id === panel.active}" class="${id === panel.active ? 'on' : ''}" data-act="ptab" data-id="${id}">${esc(CONCEPTS[id].title)}</button>`).join('')}</div>` : ''}
+    <div class="cpbody" id="cpbody">${cardHtml(c)}</div>
+  </aside>`;
+}
+function conceptsFor(kind, id){
+  if (kind === 'set') return CMAP.sets[id] || [];
+  if (kind === 'page') return CMAP.pages[id] || [];
+  return CMAP.cases[id] || CMAP.cases.default || [];
+}
+function viewConcepts(){
+  const active = CONCEPTS[view.card] ? view.card : D.concepts[0].id;
+  const groups = Object.keys(D.chapters).map(ch => ({ch:+ch, cards:D.concepts.filter(c => c.ch === +ch)})).filter(g => g.cards.length);
+  return `<h1 class="h-page">Concepts</h1>
+  <p class="lead">All rules and concepts of chapters 1–9 with examples. The same cards open on the right after you check a task.</p>
+  <div class="clib">
+    <nav class="cindex" aria-label="Concept cards">${groups.map(g => `<div class="cgroup"><div class="cgh">${g.ch} ${esc(D.chapters[g.ch])}${CORE.includes(g.ch) ? '<span class="core-dot" title="Focus chapter"></span>' : ''}</div>
+      ${g.cards.map(c => `<button class="${c.id === active ? 'on' : ''}" data-act="cpick" data-id="${c.id}">${esc(c.title)}</button>`).join('')}</div>`).join('')}</nav>
+    <div class="sheet ccard" id="ccard">${cardHtml(CONCEPTS[active])}</div>
+  </div>`;
+}
+
+/* ================= HOME ================= */
+function lastDone(examId){ return S.attempts.filter(t => t.examId === examId).sort((a, b) => b.started - a.started)[0]; }
+function bestScore(examId){ const xs = S.attempts.filter(t => t.examId === examId).map(t => scoreAll(t).total); return xs.length ? Math.max(...xs) : null; }
+
+function viewHome(){
+  const mocks = D.exams.filter(e => !e.sample);
+  const doneMocks = mocks.filter(e => S.attempts.some(t => t.examId === e.id)).length;
+  const totals = S.attempts.map(t => scoreAll(t).total);
+  const avg = totals.length ? (totals.reduce((a, b) => a + b, 0) / totals.length).toFixed(1) : '–';
+  const row = e => {
+    const ip = S.inprog[e.id], ld = lastDone(e.id), best = bestScore(e.id);
+    const cs = CASES[e.partC], pg = PAGES[e.partB];
+    const chs = e.partA.map(id => SETS[id].ch).join(', ');
+    const status = ip ? `<span class="tag prog">in progress</span>` : ld ? `<span class="tag done">done</span>` : '';
+    return `<div class="exrow">
+      <div>
+        <h3>${esc(e.title)} ${status}${e.generated ? '<span class="tag ink">new mix</span>' : ''}</h3>
+        <div class="meta">Part A chapters ${chs}. Part B: ${esc(pg.title)}. Part C: ${esc(cs.topic)} (${AIM[cs.aim]})</div>
+        ${best !== null ? `<div class="meta">Best result <span class="score-badge">${best} / 60</span> after ${S.attempts.filter(t => t.examId === e.id).length} attempt(s)</div>` : ''}
+      </div>
+      <div class="acts">
+        ${ip ? `<button class="btn primary small" data-act="resume" data-id="${e.id}">Resume ${ip.mode === 'exam' ? 'exam' : 'practice'}</button>
+           <button class="btn small" data-act="restart" data-id="${e.id}">Restart</button>
+           <button class="btn quiet small danger" data-act="discard" data-id="${e.id}">Discard</button>` :
+          `<button class="btn primary small" data-act="start" data-id="${e.id}" data-mode="exam">Start exam (60 min)</button>
+           <button class="btn small" data-act="start" data-id="${e.id}" data-mode="practice">Practice</button>`}
+        ${ld ? `<button class="btn quiet small" data-act="review" data-id="${ld.id}">Review last attempt</button>` : ''}
+        ${e.generated ? `<button class="btn quiet small danger" data-act="delgen" data-id="${e.id}">Delete</button>` : ''}
+      </div></div>`;
+  };
+  return `
+  <h1 class="h-page">Mock exams</h1>
+  <p class="lead">Same format as the written test: Part A true/false matrix (25 points), Part B finding mistakes on a term-paper page (10 points), Part C interpreting a topic (25 points). Both modes show the solution right after each block, with the detailed explanation to expand underneath. Exam mode adds the 60-minute timer; practice mode has no time limit.</p>
+  <label class="setting"><input type="checkbox" data-act="hold" ${S.settings.holdBack ? 'checked' : ''}><span><b>Real exam conditions:</b> in exam mode, hold back all solutions until I hand in. Applies to exams you start from now on.</span></label>
+  <div class="progressline">
+    <div><b>${doneMocks} / ${mocks.length}</b><span>mock exams completed</span></div>
+    <div><b>${S.attempts.length}</b><span>attempts in total</span></div>
+    <div><b>${avg}</b><span>average score out of 60</span></div>
+  </div>
+  <div class="section"><h2>Official sample exam</h2><div class="exlist">${D.exams.filter(e => e.sample).map(row).join('')}</div></div>
+  <div class="section"><h2>Mock exams 1–10</h2><div class="exlist">${mocks.map(row).join('')}</div></div>
+  <div class="section"><h2>New exams from the question pool</h2>
+    ${S.generated.length ? `<div class="exlist">${S.generated.map(row).join('')}</div>` : ''}
+    <div class="newexam">
+      <p>${doneMocks < mocks.length ? `Recommended once you have finished the ten mock exams (${doneMocks} done so far). ` : ''}A new exam takes three Part A sets from chapters 4, 7, 8 and 9 and two from the basic chapters. It adds the Part B page and the Part C case you have used least. Sets you got wrong come up more often.</p>
+      <button class="btn primary" data-act="generate">Create a new exam</button>
+    </div>
+  </div>`;
+}
+
+/* --------- generator --------- */
+function setErrRate(id){ let n = 0, w = 0; for (let i = 0; i < 3; i++) { const r = S.stmt[id + ':' + i]; if (r) { n += r.n; w += r.w; } } return n ? w / n : null; }
+function weightedPick(items, wfn){ const ws = items.map(wfn), sum = ws.reduce((a, b) => a + b, 0); let r = Math.random() * sum; for (let i = 0; i < items.length; i++) { r -= ws[i]; if (r <= 0) return items[i]; } return items[items.length - 1]; }
+function generateExam(){
+  const usage = {}; allExams().forEach(e => e.partA.forEach(id => usage[id] = (usage[id] || 0) + 1));
+  const w = s => { const er = setErrRate(s.id); return Math.max(0.2, 1 + (er === null ? 1 : 3 * er) - 0.35 * (usage[s.id] || 0)); };
+  const pickCh = chs => chs.map(ch => weightedPick(D.partA.filter(s => s.ch === ch), w).id);
+  const partA = pickCh(shuffle(CORE).slice(0, 3)).concat(pickCh(shuffle(BASIC).slice(0, 2)));
+  const useCount = (key, id) => allExams().filter(e => e[key] === id).length + S.attempts.filter(t => t.def[key] === id).length;
+  const least = (list, key) => { const min = Math.min(...list.map(x => useCount(key, x.id))); return shuffle(list.filter(x => useCount(key, x.id) === min))[0].id; };
+  const n = D.exams.filter(e => !e.sample).length + S.generated.length + 1;
+  const ex = {id:'g' + Date.now(), title:'Mock exam ' + n, generated:true, partA, partB:least(D.partB, 'partB'), partC:least(D.partC, 'partC')};
+  S.generated.push(ex); save(true); render();
+}
+
+/* ================= EXAM ================= */
+function examBar(){
+  const t = cur; if (!t) return '';
+  const left = t.mode === 'exam' && !t.done ? EXAM_SECONDS - t.elapsed : null;
+  return `<div class="exambar"><div class="wrap">
+    <button class="btn quiet small" data-act="leave">Back to exams</button>
+    <div><div class="title">${esc(t.title)}</div><div class="mode">${t.done ? 'Review' : t.mode === 'exam' ? (t.holdBack ? 'Exam mode: solutions after handing in' : 'Exam mode: solution after each block') : 'Practice mode: no time limit'}</div></div>
+    <div class="tabs">${['A', 'B', 'C'].map(p => `<button class="${t.part === p ? 'on' : ''}" data-act="part" data-p="${p}">Part ${p}</button>`).join('')}</div>
+    ${left !== null ? `<div class="timer ${left < 600 ? 'low' : ''}" id="timer" title="Time left">${fmtTime(left)}</div>` : t.done ? '' : `<div class="timer" id="timer" title="Time spent">${fmtTime(t.elapsed)}</div>`}
+  </div></div>`;
+}
+function startTimer(){
+  stopTimer();
+  tick = setInterval(() => {
+    if (!cur || cur.done || document.hidden) return;
+    cur.elapsed++;
+    const el = document.getElementById('timer');
+    if (cur.mode === 'exam') {
+      const left = EXAM_SECONDS - cur.elapsed;
+      if (el) { el.textContent = fmtTime(left); el.classList.toggle('low', left < 600); }
+      if (left <= 0) { finish(true); return; }
+    } else if (el) el.textContent = fmtTime(cur.elapsed);
+    if (cur.elapsed % 5 === 0) save();
+  }, 1000);
+}
+function stopTimer(){ if (tick) clearInterval(tick); tick = null; }
+
+function viewExam(){
+  const t = cur;
+  let head = '';
+  if (t.done) head = summaryBox(t);
+  else if (view.timeup) head = `<div class="banner">Time is up. Your exam was handed in automatically.</div>`;
+  const body = t.part === 'A' ? partA(t) : t.part === 'B' ? partB(t) : partC(t);
+  const next = {A:'B', B:'C'}[t.part];
+  const foot = `<div class="foot">
+     <div>${next ? `<button class="btn" data-act="part" data-p="${next}">Continue with Part ${next}</button>` : ''}</div>
+     <div>${t.done ? `<button class="btn" data-act="leave">Back to exams</button>` :
+       `<button class="btn primary" data-act="finish">${t.mode === 'exam' ? 'Hand in exam' : 'Finish practice'}</button>`}</div></div>`;
+  return head + body + foot;
+}
+function summaryBox(t){
+  const s = scoreAll(t), r = 48, c = 2 * Math.PI * r, frac = s.total / 60;
+  const col = s.total >= 30 ? 'var(--green)' : 'var(--red)';
+  const pendingB = Object.keys(t.b.grades).length < bResult(t).found.size;
+  return `<div class="summary">
+    <div class="ring"><svg width="112" height="112"><circle cx="56" cy="56" r="${r}" fill="none" stroke="var(--rule2)" stroke-width="9"/>
+      <circle cx="56" cy="56" r="${r}" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${c * frac} ${c}"/></svg>
+      <div class="v"><b>${s.total}</b><span>of 60</span></div></div>
+    <div>
+      <div class="parts3">
+        <div><b>${s.A} / 25</b><span>Part A, graded automatically</span></div>
+        <div><b>${s.B} / 10</b><span>Part B, rate your explanations</span></div>
+        <div><b>${s.C} / 25</b><span>Part C, tick the rubric items</span></div>
+      </div>
+      <div class="hint">${pct(s.total, 60)} % of the points${t.mode === 'exam' ? `, ${fmtTime(Math.min(t.elapsed, EXAM_SECONDS))} min used` : ''}. Many exam regulations require 50 % (30 points) to pass; check yours. ${pendingB ? 'Part B starts at 1 point per mistake found; raise it to 2 if your explanation matches.' : ''} The total updates as you grade Parts B and C.</div>
+    </div></div>`;
+}
+
+/* ----- Part A ----- */
+function partA(t){
+  const sets = t.def.partA.map((id, k) => aSetHtml(t, id, k, t.done || t.a[id].checked, canCheck(t))).join('');
+  return `<div class="parthead"><h2>Part A: General knowledge</h2><span class="pts">25 points</span></div>
+  <p class="rules">Each set has three related statements. Mark each one as correct or false. You get 1 point per correct mark and 2 bonus points if all three marks in a set are right (maximum 5 per set). Explanations below the matrix are voluntary.${canCheck(t) ? ' Once all three statements of a set are marked, show its solution before moving on.' : ''}</p>
+  ${sets}`;
+}
+function aSetHtml(t, id, k, checked, canCheck, ctx){ // canCheck: show the per-block solution button
+  const set = SETS[id], st = t.a[id], ord = t.def.order[id], dctx = ctx || 'exam';
+  const rows = ord.map((idx, pos) => {
+    const x = set.s[idx], ans = st.ans[idx];
+    const ok = ans === x.a;
+    const box = (val) => {
+      const cls = ['box']; if (checked && x.a === val) cls.push('key'); if (checked && ans === val && !ok) cls.push('wrongpick');
+      return `<button class="${cls.join(' ')}" ${checked ? 'disabled' : ''} data-act="aans" data-ctx="${dctx}" data-set="${id}" data-i="${idx}" data-v="${val}" aria-label="${val ? 'Correct' : 'False'}" aria-pressed="${ans === val}">${ans === val ? CROSS : ''}</button>`;
+    };
+    let ex = '';
+    if (checked) {
+      ex = `<div class="sol ${ok ? 'ok' : 'bad'}"><span class="sm">${ok ? '✓' : '✗'}</span><div>Solution: the statement is <b>${x.a ? 'correct' : 'false'}</b>. ${ans === undefined ? 'You did not answer.' : ok ? 'Your mark is right.' : 'Your mark is wrong.'}</div></div>` +
+        `<details class="why"${ok ? '' : ' open'}><summary><span class="sh">Show explanation</span><span class="hd">Hide explanation</span></summary><div class="expl ${ok ? 'ok' : 'bad'}">${esc(stripVerdict(x.e))}</div></details>`;
+      if (st.expl[idx]) ex += `<div class="yourexpl">Your explanation: <span class="inkfont">${esc(st.expl[idx])}</span></div>`;
+    }
+    return `<tr class="${checked ? (ok ? 'st-ok' : 'st-bad') : ''}"><td class="l">${LET[pos]})</td><td>${esc(x.t)}${ex}</td><td class="bx">${box(true)}</td><td class="bx">${box(false)}</td></tr>`;
+  }).join('');
+  const r = setResult(t, id);
+  const vol = !checked ? `<details class="vol"${ord.some(i => st.expl[i]) ? ' open' : ''}><summary>Add explanations (voluntary)</summary>${ord.map((idx, pos) =>
+      `<textarea class="inkfont" data-in="aexpl" data-ctx="${dctx}" data-set="${id}" data-i="${idx}" placeholder="${LET[pos]})">${esc(st.expl[idx] || '')}</textarea>`).join('')}</details>` : '';
+  return `<div class="sheet aset" id="set-${id}">
+    <h3>A${k + 1} ${checked ? `<small>Chapter ${set.ch}: ${esc(set.topic)}</small><button class="btn small cbtn" data-act="concepts" data-kind="set" data-id="${id}" data-label="A${k + 1}">Concepts</button>` : ''}</h3>
+    <table class="mtx"><thead><tr><th></th><th>Statement</th><th>Correct</th><th>False</th></tr></thead><tbody>${rows}</tbody></table>
+    ${vol}
+    ${checked ? `<div class="ascore"><span>Statements <b>${r.ok} / 3</b></span><span>Bonus <b>${r.bonus} / 2</b></span><span class="tot">Total ${r.total} / 5</span></div>` : ''}
+    ${canCheck && !checked ? (() => { const n = ord.filter(i => st.ans[i] !== undefined).length;
+      return `<div class="rowacts">${n < 3 ? `<span class="pending">${3 - n} statement${n === 2 ? '' : 's'} left</span>` : ''}<button class="btn ${n === 3 ? 'primary' : ''}" data-act="acheck" data-ctx="${dctx}" data-set="${id}" ${n < 3 ? 'disabled' : ''}>Show solution for A${k + 1}</button></div>`; })() : ''}
+  </div>`;
+}
+
+/* ----- Part B ----- */
+function partB(t){
+  const page = PAGES[t.def.partB], tok = tokenize(page), checked = t.done || t.b.checked;
+  const res = checked ? bResult(t) : null;
+  const notes = t.b.marks.map((k, i) => `<div class="noterow"><div class="n">${i + 1}.)</div><div>
+      <div class="q">“${esc(tok.wordText[k])}”</div>
+      ${checked ? `<div class="inkfont">${esc(t.b.notes[k] || '(no explanation written)')}</div>` :
+      `<textarea class="inkfont" data-in="bnote" data-k="${k}" placeholder="Why is this a mistake?">${esc(t.b.notes[k] || '')}</textarea>`}</div></div>`).join('');
+  let list = '';
+  if (checked) {
+    const firstMark = {}; t.b.marks.forEach((k, i) => { const e = tok.wordErr[k]; if (e && !(e in firstMark)) firstMark[e] = i; });
+    list = `<div class="sheet"><h3 style="font-size:17px;display:flex;align-items:center;gap:10px">All mistakes on this page (${Object.keys(page.errors).length})<button class="btn small cbtn" data-act="concepts" data-kind="page" data-id="${page.id}" data-label="Part B">Concepts</button></h3>
+      <p class="rules">The exam asks for at least five. Each mistake you found and explained correctly is worth 2 points, up to 10 points. Rate each mistake you found. 1 point means you only located it; 2 points means your explanation matches.</p>
+      ${Object.entries(page.errors).map(([e, er]) => {
+        const f = res.found.has(e), txt = Object.keys(tok.wordErr).filter(k => tok.wordErr[k] === e).map(k => tok.wordText[k]).join(' ');
+        const yours = f ? (t.b.notes[t.b.marks[firstMark[e]]] || '') : '';
+        return `<div class="berr"><div class="st ${f ? 'f' : 'm'}">${f ? 'Found (fn. ' + (firstMark[e] + 1) + ')' : 'Missed'}</div><div>
+          <h4>${esc(er.label)}</h4><div class="txt">“${esc(txt.length > 140 ? txt.slice(0, 140) + '…' : txt)}”, ${er.type} mistake, chapter ${er.ch}</div>
+          <details class="why"${f ? '' : ' open'}><summary><span class="sh">Why is this a mistake?</span><span class="hd">Hide explanation</span></summary><div class="expl ${f ? 'ok' : 'bad'}">${esc(er.expl)}</div></details>
+          ${f && yours ? `<div class="yours">Your explanation: ${esc(yours)}</div>` : ''}
+          ${f ? `<div class="grade"><button class="${(t.b.grades[e] || 1) === 1 ? 'on' : ''}" data-act="bgrade" data-e="${e}" data-v="1">1 point: located only</button><button class="${t.b.grades[e] === 2 ? 'on' : ''}" data-act="bgrade" data-e="${e}" data-v="2">2 points: explained correctly</button></div>` : ''}
+        </div></div>`;
+      }).join('')}
+      <div class="ascore"><span>Mistakes found <b>${res.found.size} / ${Object.keys(page.errors).length}</b></span><span>Marks on correct text <b>${res.falseMarks.length}</b></span><span class="tot">Points ${res.pts} / 10</span></div></div>`;
+  }
+  return `<div class="parthead"><h2>Part B: Identifying mistakes</h2><span class="pts">10 points</span></div>
+  <p class="rules">${esc(page.context)} ${checked ? '' : 'Click on a word to mark it with a footnote, then explain the mistake below the page. Click a marked word again to remove the mark.'}</p>
+  ${checked ? `<div class="legend"><span><i style="background:#CDEBD7"></i>mistake you found</span><span><i style="background:#F6D3CF"></i>mistake you missed</span><span><i style="background:#ECECEC"></i>your mark on correct text</span></div>` : ''}
+  <div class="paper ${checked ? '' : 'live'}" id="paper" data-page="${page.id}">${tok.html}</div>
+  <div class="sheet notes"><h3 style="font-size:17px">Your explanations</h3>
+    ${t.b.marks.length ? notes : '<p class="empty">No marks yet. Click on the words in the page above that contain a mistake.</p>'}
+    ${!checked && canCheck(t) ? `<div class="rowacts"><button class="btn primary" data-act="bcheck">Show solution for Part B</button></div>` : ''}
+  </div>${list}`;
+}
+function decoratePaper(){
+  const p = document.getElementById('paper'); if (!p || !cur) return;
+  const t = cur, tok = tokenize(PAGES[t.def.partB]), checked = t.done || t.b.checked;
+  const res = checked ? bResult(t) : null;
+  const order = {}; t.b.marks.forEach((k, i) => order[k] = i + 1);
+  p.querySelectorAll('.w').forEach(w => {
+    const k = w.dataset.k, e = tok.wordErr[k];
+    w.classList.toggle('mk', !checked && !!order[k]);
+    if (checked) {
+      if (e) w.classList.add(res.found.has(e) ? 'e-found' : 'e-missed');
+      else if (order[k]) w.classList.add('e-false');
+    }
+    const old = w.querySelector('.fn'); if (old) old.remove();
+    if (order[k]) w.insertAdjacentHTML('beforeend', `<sup class="fn">${order[k]}</sup>`);
+  });
+}
+
+/* ----- Part C ----- */
+function partC(t){
+  const cs = CASES[t.def.partC];
+  const tasks = cs.tasks.map((task, i) => {
+    const shown = t.done || t.c.shown[i];
+    const words = (t.c.ans[i].trim().match(/\S+/g) || []).length;
+    return `<div class="task"><div class="q"><b>${i + 1})</b> ${esc(task.q)} <span style="color:var(--muted);font-family:var(--sans);font-size:14px">(${task.pts} points)</span></div>
+      ${shown ? `<div class="sheet" style="margin-top:8px;padding:14px 18px"><div style="font-size:13px;color:var(--muted)">Your answer</div><div class="inkfont" style="white-space:pre-wrap;font-size:15.5px">${esc(t.c.ans[i] || '(no answer)')}</div></div>` :
+        `<textarea data-in="cans" data-i="${i}" placeholder="Write your answer here …">${esc(t.c.ans[i])}</textarea><div class="cnt">${words} words</div>`}
+      ${!shown && canCheck(t) ? `<div class="rowacts"><button class="btn primary" data-act="cshow" data-i="${i}">Show solution for task ${i + 1}</button></div>` : ''}
+      ${shown ? `<div class="model"><div class="mh">Model answer</div><pre>${esc(task.model)}</pre>
+        <div class="rubric"><h5>Tick what your answer covers</h5>${task.rubric.map((r, j) =>
+          `<label><input type="checkbox" data-act="crub" data-i="${i}" data-j="${j}" ${t.c.rub[i][j] ? 'checked' : ''}><span>${esc(r.c)}</span><span class="p">${r.p} pt</span></label>`).join('')}
+          <div class="sum">Your points: <span id="csum${i}">${cTaskPts(t, i)}</span> / ${task.pts}</div></div></div>` : ''}
+    </div>`;
+  }).join('');
+  return `<div class="parthead"><h2>Part C: Interpretation of a topic</h2><span class="pts">${t.done || t.c.shown.some(x => x) ? `<button class="btn small cbtn" data-act="concepts" data-kind="case" data-id="${cs.id}" data-label="Part C">Concepts</button> ` : ''}25 points</span></div>
+  <div class="sheet"><div style="color:var(--muted);font-size:14px">The title/topic of a given research project is as follows:</div>
+    <div class="topicline">${esc(cs.topic)}</div>
+    <div style="color:var(--muted);font-size:14px;margin-top:12px">The following information is available:</div>
+    <div class="info"><h4>${esc(cs.info.heading)}</h4>${cs.info.text.map(p => `<p>${esc(p)}</p>`).join('')}<p class="src">${esc(cs.info.source)}</p></div>
+    ${tasks}</div>`;
+}
+
+/* ----- finishing ----- */
+function finish(timeup){
+  const t = cur;
+  t.def.partA.forEach(id => { if (!t.a[id].checked) { t.a[id].checked = true; recordSet(t, id); } });
+  if (!t.b.checked) { t.b.checked = true; recordB(t); }
+  t.c.shown = [true, true, true];
+  t.done = true; t.finished = Date.now();
+  delete S.inprog[t.examId];
+  S.attempts.push(t); save(true); stopTimer();
+  view = {name:'exam', timeup:!!timeup}; t.part = 'A'; render(); window.scrollTo(0, 0);
+}
+
+/* ================= CHAPTER PRACTICE ================= */
+function chapterAcc(ch){
+  let n = 0, w = 0;
+  D.partA.filter(s => s.ch === ch).forEach(s => s.s.forEach((x, i) => { const r = S.stmt[s.id + ':' + i]; if (r) { n += r.n; w += r.w; } }));
+  return {n, acc:n ? pct(n - w, n) : null};
+}
+function mistakeSets(){ return D.partA.filter(s => s.s.some((x, i) => (S.stmt[s.id + ':' + i] || {}).last === false)).map(s => s.id); }
+function viewPractice(){
+  const sel = view.sel || (view.sel = new Set(CORE));
+  const ms = mistakeSets();
+  return `<h1 class="h-page">Chapter practice</h1>
+  <p class="lead">Drill Part A sets by chapter, one at a time and with the explanation right after each answer. Results count towards your statistics. Chapters marked with a blue dot are the focus chapters.</p>
+  <div class="section"><h2>Choose chapters</h2>
+    <div class="chgrid">${Object.entries(D.chapters).map(([ch, name]) => {
+      ch = +ch; const a = chapterAcc(ch), cnt = D.partA.filter(s => s.ch === ch).length;
+      return `<label class="chk"><input type="checkbox" data-act="selch" data-ch="${ch}" ${sel.has(ch) ? 'checked' : ''}><span>${ch} ${esc(name)}${CORE.includes(ch) ? '<span class="core-dot" title="Focus chapter"></span>' : ''}</span><span class="acc">${cnt} sets${a.acc !== null ? ', ' + a.acc + ' %' : ''}</span></label>`;
+    }).join('')}</div>
+    <div class="rowacts" style="justify-content:flex-start;margin-top:16px">
+      <button class="btn primary" data-act="drillgo" ${sel.size ? '' : 'disabled'}>Practise 10 sets</button>
+      <button class="btn" data-act="drillall" ${sel.size ? '' : 'disabled'}>Practise all sets of these chapters</button>
+    </div></div>
+  <div class="section"><h2>Repeat your mistakes</h2>
+    <div class="card"><p style="margin:0 0 12px;color:var(--muted)">${ms.length ? `${ms.length} sets contain a statement you got wrong the last time you answered it.` : 'No open mistakes. Statements you answer wrongly will be collected here.'}</p>
+    <button class="btn" data-act="drillmiss" ${ms.length ? '' : 'disabled'}>Practise my mistakes</button></div></div>`;
+}
+function startDrill(ids, label){
+  if (!ids.length) return;
+  const t = {def:{partA:ids, order:{}}, a:{}};
+  ids.forEach(id => { t.def.order[id] = shuffle([0, 1, 2]); t.a[id] = {ans:{}, expl:{}, checked:false}; });
+  drill = {t, i:0, label}; go('drill');
+}
+function viewDrill(){
+  const d = drill, t = d.t, id = t.def.partA[d.i], n = t.def.partA.length;
+  if (d.i >= n) {
+    let ok = 0, tot = 0; t.def.partA.forEach(s => { ok += setResult(t, s).ok; tot += 3; });
+    return `<h1 class="h-page">Practice finished</h1><p class="lead">${esc(d.label)}</p>
+      <div class="tiles"><div class="tile"><b>${ok} / ${tot}</b><span>statements correct</span></div><div class="tile"><b>${pct(ok, tot)} %</b><span>accuracy</span></div></div>
+      <div class="foot"><button class="btn" data-act="nav" data-v="practice">Back to chapter practice</button><button class="btn primary" data-act="drillrestart">Repeat with new order</button></div>`;
+  }
+  const checked = t.a[id].checked;
+  return `<div class="drillhead"><span>${esc(d.label)}</span><span>Set ${d.i + 1} of ${n}</span></div>
+    ${aSetHtml(t, id, d.i, checked, true, 'drill')}
+    <div class="foot"><button class="btn quiet" data-act="nav" data-v="practice">End practice</button>
+    ${checked ? `<button class="btn primary" data-act="drillnext">${d.i + 1 < n ? 'Next set' : 'Show result'}</button>` : ''}</div>`;
+}
+
+/* ================= STATISTICS ================= */
+function viewStats(){
+  const at = S.attempts.slice().sort((a, b) => a.started - b.started);
+  const sc = at.map(scoreAll);
+  const avg = k => sc.length ? (sc.reduce((s, x) => s + x[k], 0) / sc.length) : 0;
+  let sn = 0, sw = 0; Object.values(S.stmt).forEach(r => { sn += r.n; sw += r.w; });
+  // chart
+  let chart = '<p class="empty">Complete an exam to see your score history.</p>';
+  if (sc.length) {
+    const W = 860, H = 230, L = 40, R = 14, T = 14, B = 30, n = sc.length;
+    const x = i => n === 1 ? (L + (W - L - R) / 2) : L + i * (W - L - R) / (n - 1), y = v => T + (H - T - B) * (1 - v / 60);
+    const grid = [0, 15, 30, 45, 60].map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${v === 30 ? '#B8322A' : '#E8EAE3'}" ${v === 30 ? 'stroke-dasharray="5 4"' : ''}/><text x="${L - 8}" y="${y(v) + 4}" font-size="11" text-anchor="end" fill="#646a73">${v}</text>`).join('');
+    const pts = sc.map((s, i) => `${x(i)},${y(s.total)}`).join(' ');
+    const dots = sc.map((s, i) => `<circle cx="${x(i)}" cy="${y(s.total)}" r="4.5" fill="#2541A6"><title>${esc(at[i].title)}: ${s.total} / 60 (${fmtDate(at[i].started)})</title></circle><text x="${x(i)}" y="${H - 10}" font-size="11" text-anchor="middle" fill="#646a73">${i + 1}</text>`).join('');
+    chart = `<div class="chartwrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Score per attempt">${grid}<text x="${W - R}" y="${y(30) - 5}" font-size="11" text-anchor="end" fill="#B8322A">50 %</text><polyline points="${pts}" fill="none" stroke="#2541A6" stroke-width="2"/>${dots}</svg></div><p class="hint">Points per attempt in chronological order. The dashed line marks 30 of 60 points.</p>`;
+  }
+  const bar = (label, v, max, txt, color) => `<div class="row"><div>${label}</div><div class="track"><div class="fill" style="width:${max ? Math.round(v / max * 100) : 0}%;background:${color || 'var(--ink)'}"></div></div><div class="val">${txt}</div></div>`;
+  const chBars = Object.entries(D.chapters).map(([ch, name]) => { ch = +ch; const a = chapterAcc(ch);
+    return bar(`${ch} ${esc(name)}${CORE.includes(ch) ? '<span class="core-dot"></span>' : ''}`, a.acc || 0, 100, a.acc === null ? 'not practised' : `${a.acc} % of ${a.n}`, a.acc === null ? 'var(--rule)' : a.acc >= 80 ? 'var(--green)' : a.acc >= 60 ? '#C9A227' : 'var(--red)'); }).join('');
+  // B stats
+  const bt = {formal:[0, 0], substantial:[0, 0]}, bch = {};
+  D.partB.forEach(p => Object.entries(p.errors).forEach(([e, er]) => { const r = S.bstat[e]; if (!r) return; bt[er.type][0] += r.f; bt[er.type][1] += r.n; const c = bch[er.ch] || (bch[er.ch] = [0, 0]); c[0] += r.f; c[1] += r.n; }));
+  const bBars = ['formal', 'substantial'].map(k => bar(k[0].toUpperCase() + k.slice(1) + ' mistakes', bt[k][0], bt[k][1], bt[k][1] ? `${pct(bt[k][0], bt[k][1])} % found` : 'no data')).join('') +
+    Object.keys(bch).sort().map(ch => bar(`Chapter ${ch} rules`, bch[ch][0], bch[ch][1], `${pct(bch[ch][0], bch[ch][1])} % found`, '#6E7FC4')).join('');
+  // most missed statements
+  const missed = Object.entries(S.stmt).filter(([, r]) => r.w > 0).sort((a, b) => (b[1].w / b[1].n) - (a[1].w / a[1].n) || b[1].w - a[1].w).slice(0, 10);
+  const missHtml = missed.length ? missed.map(([k, r]) => { const [id, i] = k.split(':'), s = SETS[id], x = s.s[+i];
+    return `<div class="miss"><div class="s">${esc(x.t)}</div><div class="m">Chapter ${s.ch}, ${esc(s.topic)}. Wrong ${r.w} of ${r.n} times. The statement is ${x.a ? 'correct' : 'false'}.</div><div class="expl" style="margin-top:4px">${esc(x.e)}</div></div>`; }).join('') : '<p class="empty">No wrong answers recorded yet.</p>';
+  const bmiss = []; D.partB.forEach(p => Object.entries(p.errors).forEach(([e, er]) => { const r = S.bstat[e]; if (r && r.f < r.n) bmiss.push([er, r, p]); }));
+  bmiss.sort((a, b) => (a[1].f / a[1].n) - (b[1].f / b[1].n));
+  const bmissHtml = bmiss.length ? bmiss.slice(0, 8).map(([er, r, p]) => `<div class="miss"><div class="s"><b>${esc(er.label)}</b></div><div class="m">${esc(p.title)}, ${er.type} mistake, chapter ${er.ch}. Found ${r.f} of ${r.n} times.</div><div class="expl" style="margin-top:4px">${esc(er.expl)}</div></div>`).join('') : '<p class="empty">No missed Part B mistakes recorded yet.</p>';
+  const hist = at.slice().reverse().map((t, i) => { const s = scoreAll(t); return `<div class="exrow"><div><h3>${esc(t.title)} <span class="tag">${t.mode === 'exam' ? 'exam mode' : 'practice'}</span></h3><div class="meta">${fmtDate(t.started)}. Part A ${s.A}/25, Part B ${s.B}/10, Part C ${s.C}/25</div></div><div class="acts"><span class="score-badge">${s.total} / 60</span><button class="btn small" data-act="review" data-id="${t.id}">Review</button><button class="btn quiet small danger" data-act="delatt" data-id="${t.id}">Delete</button></div></div>`; }).join('');
+  return `<h1 class="h-page">Statistics</h1>
+  <p class="lead">Everything is saved in this browser on this laptop. Progress is stored separately on each device and browser. Use the backup at the bottom to move it from one device to another.</p>
+  <div class="tiles">
+    <div class="tile"><b>${at.length}</b><span>exams completed</span></div>
+    <div class="tile"><b>${sc.length ? avg('total').toFixed(1) : '–'}</b><span>average of 60 points</span></div>
+    <div class="tile"><b>${sc.length ? Math.max(...sc.map(s => s.total)) : '–'}</b><span>best result</span></div>
+    <div class="tile"><b>${sn}</b><span>statements answered</span></div>
+    <div class="tile"><b>${sn ? pct(sn - sw, sn) + ' %' : '–'}</b><span>statements correct</span></div>
+  </div>
+  <div class="section"><h2>Score history</h2><div class="card">${chart}</div></div>
+  <div class="section"><h2>Average per part</h2><div class="card bars">
+    ${sc.length ? bar('Part A (true/false)', avg('A'), 25, avg('A').toFixed(1) + ' / 25') + bar('Part B (mistakes)', avg('B'), 10, avg('B').toFixed(1) + ' / 10') + bar('Part C (interpretation)', avg('C'), 25, avg('C').toFixed(1) + ' / 25') : '<p class="empty">No completed exams yet.</p>'}
+  </div></div>
+  <div class="section"><h2>Part A accuracy by chapter</h2><div class="card bars">${chBars}</div></div>
+  <div class="section"><h2>Part B: share of mistakes found</h2><div class="card bars">${Object.keys(S.bstat).length ? bBars : '<p class="empty">No Part B page checked yet.</p>'}</div></div>
+  <div class="section"><h2>Statements you get wrong most often</h2><div class="card">${missHtml}</div></div>
+  <div class="section"><h2>Part B mistakes you tend to miss</h2><div class="card">${bmissHtml}</div></div>
+  <div class="section"><h2>All attempts</h2>${hist ? `<div class="exlist">${hist}</div>` : '<p class="empty">No attempts yet.</p>'}</div>
+  <div class="section"><h2>Backup</h2><div class="card" style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn" data-act="export">Back up progress</button>
+    <button class="btn" data-act="import">Restore from backup</button>
+    <input type="file" id="importfile" accept=".json,application/json" hidden>
+    <button class="btn danger" data-act="reset" style="margin-left:auto">Delete all progress</button></div></div>`;
+}
+
+/* ================= EVENTS ================= */
+function getT(ctx){ return ctx === 'drill' ? drill.t : cur; }
+const ACT = {
+  nav(el){ go(el.dataset.v); },
+  start(el){
+    const ex = examById(el.dataset.id); cur = newAttempt(ex, el.dataset.mode);
+    S.inprog[ex.id] = cur; save(true); view = {name:'exam'}; render(); window.scrollTo(0, 0); startTimer();
+  },
+  resume(el){ cur = S.inprog[el.dataset.id]; view = {name:'exam'}; render(); window.scrollTo(0, 0); startTimer(); },
+  review(el){ cur = S.attempts.find(t => t.id === el.dataset.id); cur.part = 'A'; view = {name:'exam'}; render(); window.scrollTo(0, 0); },
+  async restart(el){
+    const ip = S.inprog[el.dataset.id]; if (!ip) return;
+    if (!await ask('Discard your current answers and start this exam again from the beginning (same mode, new order of statements)?', 'Restart', true)) return;
+    cur = newAttempt(examById(el.dataset.id), ip.mode); S.inprog[el.dataset.id] = cur; save(true);
+    view = {name:'exam'}; render(); window.scrollTo(0, 0); startTimer();
+  },
+  async discard(el){
+    if (!await ask('Discard this unfinished attempt? Your answers in it will be deleted and it will not appear in the attempts list.', 'Discard', true)) return;
+    delete S.inprog[el.dataset.id]; save(true); render();
+  },
+  leave(){ if (cur && !cur.done) save(true); go('home'); },
+  part(el){ cur.part = el.dataset.p; save(); render(); window.scrollTo(0, 0); },
+  aans(el){
+    const t = getT(el.dataset.ctx), st = t.a[el.dataset.set], i = +el.dataset.i, v = el.dataset.v === 'true';
+    st.ans[i] = st.ans[i] === v ? undefined : v; if (st.ans[i] === undefined) delete st.ans[i];
+    if (el.dataset.ctx !== 'drill') save(); rerenderKeep();
+  },
+  acheck(el){
+    const t = getT(el.dataset.ctx), id = el.dataset.set; t.a[id].checked = true; recordSet(t, id); save();
+    openPanel(conceptsFor('set', id), 'A' + (t.def.partA.indexOf(id) + 1)); rerenderKeep();
+  },
+  bcheck(){ cur.b.checked = true; recordB(cur); save(); openPanel(conceptsFor('page', cur.def.partB), 'Part B'); rerenderKeep(); },
+  bgrade(el){ cur.b.grades[el.dataset.e] = +el.dataset.v; save(); rerenderKeep(); },
+  cshow(el){ cur.c.shown[+el.dataset.i] = true; save(); openPanel(conceptsFor('case', cur.def.partC), 'task ' + (+el.dataset.i + 1)); rerenderKeep(); },
+  concepts(el){ openPanel(conceptsFor(el.dataset.kind, el.dataset.id), el.dataset.label); rerenderKeep(); },
+  pclose(){ panel = null; rerenderKeep(); },
+  ptab(el){ panel.active = el.dataset.id; rerenderKeep(); const b = document.getElementById('cpbody'); if (b) b.scrollTop = 0; },
+  cpick(el){ view.card = el.dataset.id; render(); const c = document.getElementById('ccard'); if (c && window.innerWidth < 900) c.scrollIntoView(); },
+  crub(el){
+    const i = +el.dataset.i, j = +el.dataset.j; cur.c.rub[i][j] = el.checked; save();
+    document.getElementById('csum' + i).textContent = cTaskPts(cur, i);
+    if (cur.done) { const top = document.querySelector('.summary'); if (top) top.outerHTML = summaryBox(cur); }
+  },
+  async finish(){
+    const msg = cur.mode === 'exam' ? 'Hand in the exam now? You will see all solutions afterwards.' : 'Finish the practice run? Unchecked parts will be checked now.';
+    if (await ask(msg, cur.mode === 'exam' ? 'Hand in' : 'Finish')) finish(false);
+  },
+  generate(){ generateExam(); },
+  hold(el){ S.settings.holdBack = el.checked; save(true); },
+  async delgen(el){ if (!await ask('Delete this generated exam? Your past attempts stay in the statistics.', 'Delete', true)) return; S.generated = S.generated.filter(e => e.id !== el.dataset.id); delete S.inprog[el.dataset.id]; save(true); render(); },
+  async delatt(el){ if (!await ask('Delete this attempt from the statistics?', 'Delete', true)) return; S.attempts = S.attempts.filter(t => t.id !== el.dataset.id); save(true); render(); },
+  selch(el){ const ch = +el.dataset.ch; el.checked ? view.sel.add(ch) : view.sel.delete(ch); render(); },
+  drillgo(){ const ids = D.partA.filter(s => view.sel.has(s.ch)); startDrill(shuffle(ids).slice(0, 10).map(s => s.id), 'Chapters ' + [...view.sel].sort().join(', ') + ', 10 sets'); },
+  drillall(){ const ids = D.partA.filter(s => view.sel.has(s.ch)); startDrill(shuffle(ids).map(s => s.id), 'Chapters ' + [...view.sel].sort().join(', ') + ', all sets'); },
+  drillmiss(){ startDrill(shuffle(mistakeSets()), 'Repeating your mistakes'); },
+  drillnext(){ drill.i++; panel = null; render(); window.scrollTo(0, 0); },
+  drillrestart(){ startDrill(shuffle(drill.t.def.partA), drill.label); },
+  export(){
+    const json = JSON.stringify(S);
+    modal(`<h3>Backup of your progress</h3><p>Copy this text and keep it somewhere safe (e.g. in a note), or download it as a file. To restore it on another device, use “Restore from backup” there and paste the text.</p>
+      <textarea class="bk" readonly data-focus>${esc(json)}</textarea>
+      <div class="mrow"><button class="btn" data-m="dl">Download as file</button><button class="btn" data-m="close">Close</button><button class="btn primary" data-m="copy">Copy text</button></div>`, {
+      copy: d => { const ta = d.querySelector('textarea'); ta.select();
+        const done = () => { d.querySelector('[data-m=copy]').textContent = 'Copied'; };
+        try { navigator.clipboard.writeText(json).then(done, () => { document.execCommand('copy'); done(); }); } catch (e) { try { document.execCommand('copy'); done(); } catch (e2) {} }
+        return false; },
+      dl: () => { try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([json], {type:'application/json'})); a.download = 'araw-progress-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); } catch (e) {} return false; },
+      close: () => {}
+    });
+  },
+  import(){
+    modal(`<h3>Restore from backup</h3><p>Paste the backup text below, or choose a backup file. Your current progress on this device will be replaced.</p>
+      <textarea class="bk" data-focus placeholder="Paste backup text here"></textarea>
+      <div class="mrow"><button class="btn" data-m="file">Choose file</button><button class="btn" data-m="close">Cancel</button><button class="btn primary warn" data-m="go">Restore</button></div>`, {
+      file: () => { document.getElementById('importfile').click(); },
+      go: d => restoreBackup(d.querySelector('textarea').value),
+      close: () => {}
+    });
+  },
+  async reset(){ if (await ask('Delete all attempts, statistics and generated exams? This cannot be undone.', 'Delete everything', true)) { S = blank(); save(true); render(); } }
+};
+// Part B word clicks
+function onPaperClick(e){
+  const w = e.target.closest('.paper.live .w'); if (!w || !cur || cur.done || cur.b.checked) return;
+  const k = w.dataset.k, i = cur.b.marks.indexOf(k);
+  if (i >= 0) { cur.b.marks.splice(i, 1); delete cur.b.notes[k]; } else { cur.b.marks.push(k); cur.b.marks.sort((a, b) => +a.slice(1) - +b.slice(1)); }
+  save(); rerenderKeep();
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('.paper.live')) return onPaperClick(e);
+  const el = e.target.closest('[data-act]'); if (!el || el.tagName === 'INPUT' && el.type === 'checkbox' && !['crub', 'selch', 'hold'].includes(el.dataset.act)) return;
+  if (el.disabled) return;
+  const f = ACT[el.dataset.act]; if (f) f(el, e);
+});
+document.addEventListener('input', e => {
+  const el = e.target; if (!el.dataset || !el.dataset.in) return;
+  if (el.dataset.in === 'aexpl') { getT(el.dataset.ctx).a[el.dataset.set].expl[+el.dataset.i] = el.value; }
+  else if (el.dataset.in === 'bnote') { cur.b.notes[el.dataset.k] = el.value; }
+  else if (el.dataset.in === 'cans') { cur.c.ans[+el.dataset.i] = el.value; const c = el.nextElementSibling; if (c) c.textContent = (el.value.trim().match(/\S+/g) || []).length + ' words'; }
+  save();
+});
+document.addEventListener('change', e => {
+  if (e.target.id !== 'importfile' || !e.target.files[0]) return;
+  const r = new FileReader();
+  r.onload = () => restoreBackup(r.result);
+  r.readAsText(e.target.files[0]);
+});
+function restoreBackup(text){
+  let d; try { d = JSON.parse(text); if (!d || !Array.isArray(d.attempts)) throw 0; } catch (e) { note('This is not a valid ARAW trainer backup. Copy the complete text from “Download backup” and try again.'); return false; }
+  S = Object.assign(blank(), d); if (!S.settings) S.settings = {holdBack:false}; save(true); render();
+  note('Backup restored: ' + S.attempts.length + ' attempts loaded.');
+}
+function rerenderKeep(){ const y = window.scrollY; render(); window.scrollTo(0, y); }
+const _render = render;
+render = function(){ _render(); if (view.name === 'exam' && cur && cur.part === 'B') decoratePaper(); };
+window.addEventListener('beforeunload', () => save(true));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && panel && !document.querySelector('.modal')) { panel = null; rerenderKeep(); } });
+
+render();
+</script>
+</body>
+</html>
