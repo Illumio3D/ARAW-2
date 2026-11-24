@@ -757,6 +757,10 @@ window.ARAW_DATA = {
    "sample": true,
    "title": "Abstract of a term paper (official sample)",
    "context": "The following page is taken from a term paper. Identify at least five formal or substantial mistakes.",
+   "notes": [
+    "The lecture slide draws a line next to the paragraph with ‘???’. The lecture notes read this as a layout issue (paragraph left-aligned instead of justified) – but even the notes add a question mark, so treat it as uncertain and do not rely on it.",
+    "In the official solution, the JEL lines contain three separate points: the explanations are redundant, capital letters are used inconsistently, and commas and semicolons are mixed. In the exam, name them separately."
+   ],
    "blocks": [
     {
      "k": "h1",
@@ -768,7 +772,8 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "[[b0_ret|Return two past decades,]] the trend of executing [[b0_ma|M&A transaction]] between the corporations [[b0_pop|has been more and more popular.]] Because of the fact that M&A can bring many opportunities for [[b0_both|both of companies involving in transaction,]] such as expanding the business activities, taking advantages of synergy to access into new market or making a new product line, creating more shareholder value [[b0_etc|etc.]] However, [[b0_alw|there are always potential risks existing]] behind these benefits of M&A, which become the big challenges for every merging or acquiring company. To identify and minimize these potential risks as much as possible, [[b0_exe|the acquirer or merger execute due diligence,]] which is process of auditing and analyzing all information associated to the target company. Among the different specific types of due diligence financial due diligence takes role of verifying and analyzing the financial performance or statement of the target company [[b0_his|due to the historic fiscal report.]] Based on this analysis of financial due diligence the bidder can evaluate more exactly how successful the target firm operates its business and therefore identify where and by which way the synergy can be realized, as well as assess the maximum purchase price of the acquisition."
+     "left": true,
+     "x": "[[b0_ret|Return two past decades,]] [[b0_logic|the trend of executing]] [[b0_ma|M&A transaction]] between the corporations [[b0_pop|has been more and more popular.]] [[b0_frag|Because of the fact that]] M&A can bring [[b0_adj|many opportunities]] for [[b0_both|both of companies involving in transaction,]] such as expanding the business activities, taking advantages of synergy to access into new market or making a new product line, creating more shareholder value [[b0_etc|etc.]] However, [[b0_alw|there are always potential risks existing]] behind these benefits of M&A, which become the [[b0_adj|big]] challenges for every merging or acquiring company. To identify and minimize these potential risks as much as possible, [[b0_exe|the acquirer or merger execute due diligence,]] which is process of auditing and analyzing all information associated to the target company. Among the different specific types of due diligence financial due diligence takes role of verifying and analyzing the financial performance or statement of the target company [[b0_his|due to the historic fiscal report.]] Based on this analysis of financial due diligence the bidder can evaluate [[b0_adj|more exactly]] [[b0_info|how successful the target firm operates its business and therefore identify where and by which way the synergy can be realized, as well as assess the maximum purchase price of the acquisition.]]"
     },
     {
      "k": "p",
@@ -780,79 +785,125 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "G34: Mergers, Acquisitions, Restructuring, Corporate Governance"
+     "x": "[[b0_jel|G34: Mergers, Acquisitions, Restructuring, Corporate Governance]]"
     },
     {
      "k": "p",
-     "x": "G32: Financing Policy; Financial Risk and Risk Management; Capital and Ownership Structure; Value of Firms"
+     "x": "[[b0_jel|G32: Financing Policy; Financial Risk and Risk Management; Capital and Ownership Structure; Value of Firms]]"
     }
    ],
    "errors": {
-    "b0_abs": {
+    "b0_sum": {
      "type": "formal",
      "ch": 7,
-     "label": "Abstract in a term paper",
-     "expl": "According to the table of structural elements, an abstract/summary is not used in a term paper (‘No’); it is only optional for thesis projects and dissertations. Including it adds an element that does not belong to this type of paper."
-    },
-    "b0_sum": {
-     "type": "substantial",
-     "ch": 7,
-     "label": "‘Short summary’ does not summarise the paper",
-     "expl": "The short summary should condense the paper (aim/research question, approach and main findings). This text only gives general background on M&A and due diligence – the reader learns nothing about the research question or the results, so the abstract fails its purpose (filing, examination board)."
+     "off": true,
+     "label": "‘Short summary:’ is redundant",
+     "expl": "The professor marks this label as redundant. The abstract text itself is the short summary; a separate heading ‘Short summary:’ adds nothing and should be removed."
     },
     "b0_ret": {
      "type": "formal",
      "ch": 2,
-     "label": "Spelling/wording error (‘Return two past decades’)",
-     "expl": "Correct would be ‘Over the past two decades’. Spelling and grammar belong to the rules and norms of the principle of accuracy; errors reduce receptiveness and credibility."
+     "off": true,
+     "label": "Wording mistake (‘Return two past decades’)",
+     "expl": "Underlined in the official solution. Correct would be ‘Over the past two decades’. Spelling and grammar belong to the rules and norms of the principle of accuracy; language mistakes reduce receptiveness and credibility."
+    },
+    "b0_logic": {
+     "type": "substantial",
+     "ch": 2,
+     "off": true,
+     "label": "Deficient logic of the first sentence",
+     "expl": "The official solution notes a ‘deficient logic of the first sentence’: a trend cannot itself become ‘more and more popular’. What is meant is that the number of M&A transactions has increased – and that claim would need figures and a source. Consistent, precise argumentation is part of clearness."
     },
     "b0_ma": {
      "type": "formal",
      "ch": 7,
-     "label": "Abbreviation ‘M&A’ not introduced (and singular ‘transaction’)",
-     "expl": "An abbreviation must be explained where it is introduced (‘mergers and acquisitions (M&A)’) and listed in the list of abbreviations. In addition, ‘transaction’ should be plural (‘M&A transactions’)."
+     "off": true,
+     "label": "Abbreviation ‘M&A’ not introduced",
+     "expl": "Listed in the official solution. An abbreviation must be explained where it is first used (‘mergers and acquisitions (M&A)’) and listed in the list of abbreviations. In addition, ‘transaction’ should be plural."
     },
     "b0_pop": {
      "type": "substantial",
-     "ch": 9,
-     "label": "Colloquial, imprecise and unsupported claim",
-     "expl": "‘More and more popular’ is a journalistic/colloquial phrase and is not backed by figures or a reference. Academic texts use precise language (clearness) and support statements with sources (accuracy/traceability)."
+     "ch": 3,
+     "off": true,
+     "label": "Imprecise, colloquial measuring phrase (‘more and more popular’)",
+     "expl": "Underlined in the official solution. ‘More and more popular’ is colloquial and says nothing measurable: how popular, compared with what? Academic statements must be precise enough to be checked (falsifiability) and should be supported by figures or a reference."
+    },
+    "b0_frag": {
+     "type": "formal",
+     "ch": 2,
+     "off": true,
+     "label": "Incomplete sentence starting with ‘Because of the fact that’",
+     "expl": "‘Because’ is underlined in the official solution. The sentence ‘Because of the fact that M&A can bring many opportunities …, creating more shareholder value etc.’ has no main clause – it is a sentence fragment. ‘Because of the fact that’ is also a wordy filler; simply ‘M&A transactions can bring …’ would be correct."
+    },
+    "b0_adj": {
+     "type": "substantial",
+     "ch": 3,
+     "off": true,
+     "label": "Measuring adjectives (‘many’, ‘big’, ‘more exactly’)",
+     "expl": "The official solution marks ‘measuring adjectives’. Words like ‘many opportunities’, ‘big challenges’ or ‘more exactly’ evaluate without measuring anything – like ‘strong impact’ on the falsification slide, they make statements imprecise and impossible to check. Use neutral wording or concrete figures instead."
     },
     "b0_both": {
      "type": "formal",
      "ch": 2,
-     "label": "Grammar mistake",
-     "expl": "Grammar mistake: correct would be ‘for both companies involved in the transaction’. Correct spelling and grammar belong to the rules and norms of the principle of accuracy; language errors make a text harder to understand and reduce its credibility."
-    },
-    "b0_etc": {
-     "type": "substantial",
-     "ch": 2,
-     "label": "Vague enumeration with ‘etc.’",
-     "expl": "Ending an argument with ‘etc.’ leaves it open which further aspects are meant. Clearness requires avoiding ambiguities; either name all relevant aspects or state that only examples are given (‘e.g.’)."
-    },
-    "b0_alw": {
-     "type": "substantial",
-     "ch": 3,
-     "label": "Overgeneralisation (‘always’) without evidence",
-     "expl": "‘There are always potential risks’ is a sweeping universal statement without any reference. Such claims are either trivial or need substantiation; precise and traceable statements are required."
+     "off": "grammar",
+     "label": "Grammar mistake (‘both of companies involving in transaction’)",
+     "expl": "Correct would be ‘for both companies involved in the transaction’. Not explicitly listed in the official solution, but according to the lecture every different grammar mistake counts as a separate mistake."
     },
     "b0_exe": {
      "type": "formal",
      "ch": 2,
-     "label": "Grammar and wrong terminology (‘merger execute’)",
-     "expl": "Subject-verb agreement is wrong (‘the acquirer … executes’) and ‘merger’ denotes the transaction, not a party (‘merging company’). Correct terminology is part of clearness."
+     "off": "grammar",
+     "label": "Grammar and terminology (‘the acquirer or merger execute’)",
+     "expl": "Subject and verb do not agree (‘the acquirer … executes’), and ‘merger’ is the transaction, not a party (‘merging company’). Not explicitly listed in the official solution, but different grammar mistakes count separately according to the lecture."
+    },
+    "b0_etc": {
+     "type": "substantial",
+     "ch": 2,
+     "off": false,
+     "label": "Vague enumeration ending with ‘etc.’",
+     "expl": "Ending an argument with ‘etc.’ leaves open which further aspects are meant. Clearness requires avoiding ambiguities. Not part of the official solution – a reasonable point, but mark it only if you need more mistakes."
+    },
+    "b0_alw": {
+     "type": "substantial",
+     "ch": 3,
+     "off": false,
+     "label": "Sweeping claim (‘always’) without evidence",
+     "expl": "‘There are always potential risks’ is a universal statement without any reference. Not part of the official solution, but related to the ‘measuring adjectives’ point: absolute words make statements imprecise or trivial."
     },
     "b0_his": {
      "type": "substantial",
      "ch": 2,
-     "label": "Imprecise/incorrect terminology (‘due to the historic fiscal report’)",
-     "expl": "Financial due diligence is based on historical financial statements; ‘due to the historic fiscal report’ is unclear and partly wrong. Clearness requires accurate academic terminology."
+     "off": false,
+     "label": "Imprecise terminology (‘due to the historic fiscal report’)",
+     "expl": "Financial due diligence is based on historical financial statements; ‘due to the historic fiscal report’ is unclear and partly wrong. Not part of the official solution."
+    },
+    "b0_info": {
+     "type": "substantial",
+     "ch": 7,
+     "off": true,
+     "label": "Low information value: no methodology, no research question, no results",
+     "expl": "The official solution asks about the ‘information value of the abstract’, and the lecture notes add ‘no methodology’. The text only explains what due diligence is in general. An abstract should tell the reader what the paper does: its aim or research question, the method and the main findings."
     },
     "b0_kw": {
      "type": "formal",
      "ch": 7,
-     "label": "Keyword too general",
-     "expl": "Keywords should characterise the specific content for filing and retrieval (cf. ‘project finance, windmill farms, renewable energy …’). ‘Financial’ is far too unspecific; better e.g. ‘financial due diligence, purchase price, synergies’."
+     "off": true,
+     "label": "Poor keywords (‘financial’)",
+     "expl": "‘Poor keywords’ is listed in the official solution. Keywords should characterise the specific content for filing and retrieval; ‘financial’ fits thousands of papers. Better: ‘financial due diligence, purchase price, synergies, mergers and acquisitions’."
+    },
+    "b0_jel": {
+     "type": "formal",
+     "ch": 7,
+     "off": true,
+     "label": "Redundant JEL explanations (plus inconsistent capitals, comma vs. semicolon)",
+     "expl": "The professor circles both lines as redundant: the JEL classification consists of the codes only (G34, G32), their verbal explanations do not belong in the abstract. Within these lines he also marks inconsistent capital letters and the mix of commas (G34) and semicolons (G32) – in the exam you can name these as separate mistakes."
+    },
+    "b0_abs": {
+     "type": "formal",
+     "ch": 7,
+     "off": false,
+     "label": "Abstract in a term paper",
+     "expl": "According to the table of structural elements in Chapter 7, an abstract is not used in a term paper (only optional for theses and dissertations). The professor did not mark this in the official solution, so it is a valid but secondary point."
     }
    }
   },
@@ -1068,11 +1119,11 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "[[b2_pol|Everybody knows that climate change is the biggest problem of our time and politicians are doing far too little against it!]] Municipalities in Germany need to invest considerable amounts in schools, public transport and energy-efficient public buildings. [[b2_pool|The town of Lüneburg, for example, recently renovated its outdoor swimming pool, which was very popular with families.]]"
+     "x": "[[b2_pol|Everybody knows that climate change is the biggest problem of our time and politicians are doing far too little against it!]] Municipalities in Germany need to invest [[b2_adj|enormous amounts]] in schools, public transport and energy-efficient public buildings. [[b2_pool|The town of Lüneburg, for example, recently renovated its outdoor swimming pool, which was very popular with families.]]"
     },
     {
      "k": "p",
-     "x": "Bonds are debt securities that are issued by companies or public entities in order to raise funds on the capital market. Green bonds are bonds whose proceeds are used exclusively for environmentally beneficial projects. [[b2_wiki|According to Wikipedia, the global issuance of green bonds grew by 300 % last year.]] [[b2_abbr|In this paper, green bonds will be abbreviated as ‘GB’.]]"
+     "x": "Bonds are debt securities that are issued by companies or public entities in order to raise funds on the capital market. Green bonds are bonds [[b2_gram|whose proceeds is used]] exclusively for environmentally beneficial projects. [[b2_wiki|According to Wikipedia, the global issuance of green bonds grew by 300 % last year.]] [[b2_abbr|In this paper, green bonds will be abbreviated as ‘GB’.]]"
     },
     {
      "k": "p",
@@ -1131,6 +1182,20 @@ window.ARAW_DATA = {
      "ch": 4,
      "label": "Closed and imprecise research question",
      "expl": "‘Are … good …?’ is a closed (yes/no) question with an imprecise adjective (‘good’). A research question should be open-ended and precise, e.g. ‘How do green bonds and municipal loans differ with respect to financing costs and requirements for German municipalities?’"
+    },
+    "b2_adj": {
+     "type": "substantial",
+     "ch": 3,
+     "off": "type",
+     "label": "Measuring adjective without figures (‘enormous amounts’)",
+     "expl": "‘Enormous’ evaluates the investment need without measuring it – the reader cannot check how large it is. The official sample solution marks such ‘measuring adjectives’ (‘many’, ‘big’, ‘more exactly’). Precise: give the figure and a source, e.g. ‘the investment backlog of German municipalities amounts to EUR … bn (KfW 2024)’."
+    },
+    "b2_gram": {
+     "type": "formal",
+     "ch": 2,
+     "off": "grammar",
+     "label": "Grammar mistake (‘proceeds is used’)",
+     "expl": "‘Proceeds’ is a plural noun, so the verb must be plural: ‘whose proceeds are used’. According to the lecture, every different grammar mistake counts as a separate mistake (the same mistake repeated counts once)."
     },
     "b2_me": {
      "type": "substantial",
@@ -1302,7 +1367,7 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "Chapter 2 defined absenteeism as the absence of employees from work due to illness or other non-scheduled reasons and presented measures such as the absence rate."
+     "x": "Chapter 2 defined absenteeism as the absence of employees from work due to illness or other non-scheduled reasons and [[b4_gram|presented measure such as the absence rate.]]"
     },
     {
      "k": "p",
@@ -1394,6 +1459,13 @@ window.ARAW_DATA = {
      "label": "Mere speculation in the outlook",
      "expl": "The outlook must consist of own substantiated thoughts derived from the research and avoid mere speculation. A forecast that every company will introduce the model and absenteeism will disappear is neither substantiated nor plausible."
     },
+    "b4_gram": {
+     "type": "formal",
+     "ch": 2,
+     "off": "grammar",
+     "label": "Grammar mistake (‘presented measure such as’)",
+     "expl": "After ‘such as’ several examples are announced, so the noun must be plural: ‘presented measures such as the absence rate’. According to the lecture, every different grammar mistake counts as a separate mistake (the same mistake repeated counts once)."
+    },
     "b4_after": {
      "type": "formal",
      "ch": 9,
@@ -1421,7 +1493,7 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "Mobile payment refers to payments at the point of sale that are initiated via a smartphone or a smartwatch. [[b5_abbr|The number of MP transactions has increased]] since 2019, as the following figure shows."
+     "x": "Mobile payment refers to payments at the point of sale that are initiated via a smartphone or a smartwatch. [[b5_abbr|The number of MP transactions has increased]] [[b5_adj|very strongly]] since 2019, as the following figure shows."
     },
     {
      "k": "fig",
@@ -1521,6 +1593,13 @@ window.ARAW_DATA = {
      "ch": 7,
      "label": "Table split across two pages",
      "expl": "A table (or figure), its headline and its source must be placed together on one single page. If a table continues on the next page, the reader has to turn back and forth and can no longer see the data and its source together."
+    },
+    "b5_adj": {
+     "type": "substantial",
+     "ch": 3,
+     "off": "type",
+     "label": "Measuring adjective without figures (‘very strongly’)",
+     "expl": "‘Very strongly’ evaluates the increase without stating it. The official sample solution marks such ‘measuring adjectives’ (‘many’, ‘big’, ‘more exactly’). Precise: name the change in figures, e.g. ‘from 0.4 to 1.9 million transactions’, with a source."
     },
     "b5_end": {
      "type": "formal",
@@ -1821,7 +1900,7 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "[[b8_common|It is common knowledge that employees working from home are more productive.]] [[b8_ind|We looked at three consulting firms in Hamburg that introduced home office in 2021, and all of them reported higher revenues afterwards. This proves that home office always increases productivity.]]"
+     "x": "[[b8_common|It is common knowledge that employees working from home are more productive.]] [[b8_ind|We looked at three consulting firms in Hamburg that introduced home office in 2021, and all of them reported higher revenues afterwards. This proves that home office always increases productivity.]] [[b8_adj|The productivity gains were huge and very impressive.]]"
     },
     {
      "k": "p",
@@ -1878,6 +1957,13 @@ window.ARAW_DATA = {
      "ch": 9,
      "label": "Personal, colloquial anecdote",
      "expl": "Personal statements and colloquial style (‘working from the sofa was very relaxing’) are not academic evidence and violate accurate academic language and focus on the topic."
+    },
+    "b8_adj": {
+     "type": "substantial",
+     "ch": 3,
+     "off": "type",
+     "label": "Judging adjectives (‘huge and very impressive’)",
+     "expl": "The sentence evaluates instead of measuring: how large were the gains, measured how? Judging words make a statement imprecise and impossible to check, and ‘impressive’ is the author’s opinion. The official sample solution marks such ‘measuring adjectives’ (‘many’, ‘big’, ‘more exactly’). Precise: ‘revenue per employee rose by 4 %’ – and even then revenue is not productivity."
     },
     "b8_old": {
      "type": "substantial",
@@ -1975,7 +2061,7 @@ window.ARAW_DATA = {
     },
     {
      "k": "p",
-     "x": "[[b10_coll|In my thesis I want to show you why container freight derivatives (CFD) are really cool for logistics companies.]] Logistics service providers that charter container capacity on the spot market face highly volatile freight rates, which makes price quotations and profitability calculations difficult. [[b10_abbr|Especially LSP with unpredictable transportation volumes cannot conclude long-term contracts.]] Container freight derivatives allow companies to lock in future transportation costs by concluding forward agreements. The thesis describes the process of hedging with CFD. [[b10_all|Hedging with CFD eliminates all risks of logistics companies.]] [[b10_old|The data used stem from a market survey conducted in 1998.]] [[b10_res|The results of the analysis will be presented later in the thesis.]]"
+     "x": "[[b10_coll|In my thesis I want to show you why container freight derivatives (CFD) are really cool for logistics companies.]] Logistics service providers that charter container capacity on the spot market face highly volatile freight rates, which makes price quotations and profitability calculations difficult. [[b10_abbr|Especially LSP with unpredictable transportation volumes cannot conclude long-term contracts.]] [[b10_gram|Container freight derivatives allows companies]] to lock in future transportation costs by concluding forward agreements. The thesis describes the process of hedging with CFD. [[b10_all|Hedging with CFD eliminates all risks of logistics companies.]] [[b10_old|The data used stem from a market survey conducted in 1998.]] [[b10_res|The results of the analysis will be presented later in the thesis.]]"
     },
     {
      "k": "p",
@@ -2033,6 +2119,13 @@ window.ARAW_DATA = {
      "label": "No JEL codes given",
      "expl": "A JEL classification consists of codes of the Journal of Economic Literature (e.g. G13 for derivatives pricing, G32 for financial risk and risk management), not of free-text subject names."
     },
+    "b10_gram": {
+     "type": "formal",
+     "ch": 2,
+     "off": "grammar",
+     "label": "Grammar mistake (‘derivatives allows’)",
+     "expl": "The subject ‘container freight derivatives’ is plural, so the verb must be ‘allow’. According to the lecture, every different grammar mistake counts as a separate mistake (the same mistake repeated counts once)."
+    },
     "b10_len": {
      "type": "formal",
      "ch": 7,
@@ -2062,30 +2155,30 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a functional aim might be meaningful.",
-     "model": "Negative interpretation: The topic covers tuition fees in higher education and the academic success of students. Not covered are e.g. school fees in primary/secondary education, the general public funding of universities through taxes, student loans or living costs as such, and the success of institutions in rankings.\n\nPositive interpretation: All five aims are conceivable – a description (how are tuition fee systems designed?), a causal connection (what is the effect of fees on success?), an intention (what do institutions intend to achieve with fees?), a function (how do fees and success influence each other?) and a comparison (countries with vs. without fees).\n\nWhy a functional aim is meaningful: The topic joins two elements with ‘and’ without stating a direction – this points to a relationship that can run both ways (interdependency).\n• Fees → success: According to the information, fees fund staff, course offerings, lab equipment, libraries and a comfortable learning experience, which can improve learning conditions. Fees may also increase students’ motivation to finish quickly – or, on the other hand, force students into part-time jobs and deter capable but less wealthy students.\n• Success → fees: Institutions whose students are successful (e.g. high graduation rates, good career prospects) can justify and charge higher fees; fee models can also be linked to success (fee waivers or scholarships for high achievers, income-contingent repayment).\nOnly a functional interpretation captures both directions and therefore addresses the topic completely (qualitative completeness) and avoids a one-sided view. It is also decision-useful for universities and policymakers who design fee systems.",
+     "model": "Official solution (lecture 20.11.2026): “Analysis of interdependencies between tuition fees and academic success, which works both ways.”\n• Success → fees: The faster students study, the lower is the income derived from tuition fees. Therefore, fees per student have to be higher.\n• Fees → success (negative): Tuition fees might have a negative impact on academic success if students have to work in order to finance their studies, or if they are frightened by potential financial problems.\n• Fees → success (positive): Tuition fees might have a positive impact on academic success if students want to graduate as early as possible (every extra semester costs money).\n\nWhy a functional aim is meaningful: The topic joins ‘tuition fees’ and ‘academic success’ with ‘and’ without stating a direction, and the arguments show that the influence runs both ways. A causal interpretation (one direction only) would miss half of the relationship; only the functional aim analyses the interdependencies completely.\n\nFurther argument from the information text: fees fund staff, lab equipment, libraries and a comfortable learning experience, which can improve learning conditions (fees → success).\n\nNote: The official solution contains no negative or positive interpretation – it goes straight to the interdependencies. One sentence on why e.g. a causal connection fits less well can support your answer, but the points come from the arguments for both directions.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions (what the topic does NOT cover)",
+       "c": "States the functional aim as interdependencies that work both ways (A ↔ B)",
        "p": 2
       },
       {
-       "c": "Positive interpretation: names the possible aims (description, causal connection, intention, function, comparison)",
+       "c": "Argument for success → fees (e.g. faster studies → less fee income → higher fees per student)",
        "p": 2
       },
       {
-       "c": "Defines the functional aim correctly as a mutual relationship / interdependency (A ↔ B), not one-directional",
+       "c": "Negative impact of fees on success (e.g. working to finance studies, fear of financial problems)",
        "p": 2
       },
       {
-       "c": "Explains the direction ‘fees → academic success’ with arguments linked to the given information",
+       "c": "Positive impact of fees on success (e.g. graduating as early as possible; better funded teaching)",
        "p": 2
       },
       {
-       "c": "Explains the reverse direction ‘academic success → fees’ with at least one argument",
+       "c": "Explains why this is meaningful: both directions matter, a one-directional causal view would be incomplete",
        "p": 1
       },
       {
-       "c": "Justifies why this aim is meaningful (e.g. ‘and’ in the topic, completeness, decision usefulness)",
+       "c": "Concise and linked to the topic/information, no detours",
        "p": 1
       }
      ]
@@ -2093,7 +2186,7 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please develop a (direct) research question for a functional aim.",
-     "model": "Model research question:\n“How do tuition fees in higher education and the academic success of students influence each other?”\n\nAlternative:\n“What is the impact of tuition fees on the academic success of students, and what is the impact of students’ academic success on the design of tuition fees?”\n\nWhy this works: It is a direct question (main clause, question mark), it is open-ended (no yes/no answer possible), it contains both elements of the topic without reinterpreting them, and the phrase ‘influence each other’ expresses the interdependency (both directions) that characterises a functional aim.",
+     "model": "Official solution (lecture 20.11.2026):\n“How do tuition fees and academic success influence each other?”\nor\n“What is the impact of tuition fees on academic success, and what is the impact of success on tuition fees?”\n\nWhy this works: It is a direct question (main clause, question mark), it is open-ended (no yes/no answer possible), it contains both elements of the topic without reinterpreting them, and ‘influence each other’ expresses the interdependency (both directions) that characterises a functional aim.",
      "rubric": [
       {
        "c": "Direct question: main clause ending with a question mark",
@@ -2120,26 +2213,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with a functional aim encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Tuition fees in higher education\n   2.1 Definition and purposes of tuition fees\n   2.2 Tuition fee models\n3 Academic success of students\n   3.1 Definition and measurement of academic success\n   3.2 Determinants of academic success\n4 Interdependencies between tuition fees and academic success\n   4.1 Impact of tuition fees on academic success\n   4.2 Impact of academic success on tuition fees\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "Official solution (lecture 20.11.2026):\n1 Introduction\n2 Tuition fees\n3 Academic success\n4 Impact of tuition fees on academic success\n5 Impact of academic success on tuition fees\n6 Conclusion\n\nDetailed version with subchapters (decadal numbering):\n1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Tuition fees\n   2.1 Definition and purposes of tuition fees\n   2.2 Tuition fee models\n3 Academic success\n   3.1 Definition and measurement of academic success\n   3.2 Determinants of academic success\n4 Impact of tuition fees on academic success\n   4.1 Negative effects\n   4.2 Positive effects\n5 Impact of academic success on tuition fees\n   5.1 Study duration and fee income\n   5.2 Fee models depending on success\n6 Conclusion\n   6.1 Summary\n   6.2 Critical acclaim\n   6.3 Outlook\n\nLogic: chapters 2 and 3 introduce the two elements of the topic, chapters 4 and 5 analyse one direction each – exactly mirroring the functional research question.",
      "rubric": [
       {
-       "c": "Introduction is chapter 1 (research problem, [research method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion is the last chapter (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic (tuition fees, academic success) gets its own chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters in total",
-       "p": 1
+       "c": "Both directions of influence are analysed – each in its own chapter as in the official solution, or as subchapters",
+       "p": 2
       },
       {
-       "c": "Core chapter(s) mirror the functional logic: both directions of influence are analysed",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering (no full stop after last cipher, at least two subchapters per subdivided chapter)",
+       "c": "Five to six main chapters, formally correct numbering",
        "p": 1
       }
      ]
@@ -2162,28 +2251,28 @@ window.ARAW_DATA = {
    "tasks": [
     {
      "pts": 10,
-     "q": "Please perform a negative and a positive interpretation of the topic and explain why an interpretation directed at a causal connection might be meaningful in the given context.",
-     "model": "Negative interpretation: Not covered are other sectors (e.g. retail, agriculture), other countries or the EU minimum wage directive, wages set by collective agreements above the minimum wage, the period before 2015 and other effects of the minimum wage (e.g. on prices or inequality) that are not related to employment.\n\nPositive interpretation:\n• Description: How is the minimum wage regulated and how has employment in hospitality developed?\n• Causal connection: What is the effect of minimum wage increases on employment in hospitality?\n• Intention: What does the legislator intend to achieve with the minimum wage?\n• Function: How do the minimum wage and employment influence each other (e.g. labour shortage → higher wage adjustments)?\n• Comparison: Employment before vs. after an increase; hospitality vs. other sectors.\n\nDecision: The problem setting determines the aim (problem-based interpretation). The board asks whether the minimum wage increase is ‘responsible for’ the decline in mini-jobs – this is a question about cause (minimum wage increase) and effect (fewer mini-jobs) in one direction, comparable to the mini case ‘Smelly shampoo’. Possible mechanism: higher wage costs per hour, combined with the earnings ceiling of mini-jobs, reduce the hours a mini-jobber can work or make regular part-time contracts more attractive. A functional aim would add a reverse direction that is not relevant for the board’s decision, so the causal connection is the most decision-useful interpretation.",
+     "q": "Please analyse why an interpretation directed at a causal connection might be meaningful.",
+     "model": "Analysis of a causal connection – increase of the statutory minimum wage (cause) → decline of mini-jobs in the hotel chain’s restaurants (effect):\n• Cost mechanism: a higher hourly wage raises the labour costs per hour; employers react by reducing staff or hours, as employer associations warned.\n• Mini-job mechanism: mini-jobs have an earnings ceiling – with a higher hourly wage a mini-jobber may work fewer hours, and regular part-time contracts become more attractive for the employer. Mini-jobs may therefore be converted rather than lost.\n• Counter-argument from the information: trade unions argue that higher wages reduce staff turnover and strengthen purchasing power – a causal analysis has to weigh these effects and separate other causes (e.g. general labour shortage).\n\nWhy a causal connection is meaningful: the board asks whether the latest increase is ‘responsible for’ the decline – a cause-effect question in one direction, comparable to the mini case ‘Smelly shampoo’. The reverse direction (mini-jobs → minimum wage) is not relevant for the board’s decision, because the wage level is set by the Minimum Wage Commission and the legislator, not by one hotel chain; a functional aim therefore does not fit.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Defines causal connection (cause → effect, one direction)",
        "p": 2
       },
       {
-       "c": "Positive interpretation applying the five aims to the topic",
-       "p": 2
-      },
-      {
-       "c": "Links the decision to the context (‘responsible for’ → cause-effect) as a problem-based interpretation",
+       "c": "Explains a plausible mechanism (e.g. labour costs per hour, earnings ceiling of mini-jobs)",
        "p": 3
       },
       {
-       "c": "Identifies cause and effect correctly and sketches a plausible mechanism",
+       "c": "Uses the information critically (counter-arguments, other possible causes)",
+       "p": 1
+      },
+      {
+       "c": "Links the decision to the context (‘responsible for’)",
        "p": 2
       },
       {
-       "c": "Distinguishes the causal connection from the functional aim (one vs. two directions)",
-       "p": 1
+       "c": "Explains why the reverse direction is not relevant (→ not function)",
+       "p": 2
       }
      ]
     },
@@ -2217,26 +2306,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at a causal connection encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Statutory minimum wage in Germany\n   2.1 Legal framework\n   2.2 Development of the minimum wage level\n3 Employment in the German hospitality sector\n   3.1 Structure of employment\n   3.2 Marginal employment (mini-jobs)\n4 Effect of minimum wage increases on mini-jobs in the hospitality sector\n   4.1 Theoretical transmission mechanisms\n   4.2 Empirical evidence\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Statutory minimum wage in Germany\n   2.1 Legal framework\n   2.2 Development of the minimum wage level\n3 Employment in the German hospitality sector\n   3.1 Structure of employment\n   3.2 Marginal employment (mini-jobs)\n4 Effect of minimum wage increases on mini-jobs in the hospitality sector\n   4.1 Theoretical transmission mechanisms\n   4.2 Empirical evidence\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first with research problem, (method) and course of investigation",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last with summary, critical acclaim, outlook",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Structure follows the causal logic: cause chapter and effect chapter before the analysis of the causal connection",
+       "p": 2
       },
       {
-       "c": "Structure follows the causal logic: cause chapter, effect chapter, analysis of the effect",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2260,30 +2345,30 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a functional aim might be meaningful.",
-     "model": "Negative interpretation: The topic concerns home office (working from home) and the productivity of employees. Not covered are e.g. mobile work while travelling, co-working spaces, other HR topics such as remuneration, the productivity of machines or of the whole economy, and health effects that are not related to productivity.\n\nPositive interpretation: A description (how are home office models designed?), a causal connection (effect of home office on productivity), an intention (what do companies intend with home office?), a function (how do home office and productivity influence each other?) or a comparison (office vs. home office; different companies) is conceivable.\n\nWhy function: The information shows that the relationship runs in both directions:\n• Home office → productivity: saved commuting time and fewer interruptions can raise productivity; more difficult coordination and less informal knowledge exchange can lower it.\n• Productivity → home office: companies grant more home office to teams that deliver measurable results reliably and call teams with declining output back to the office (return-to-office policies).\nA purely causal analysis would ignore that the observed productivity level itself determines how much home office is granted – the relationship is an interdependency. The functional aim therefore covers the topic completely and avoids false conclusions (e.g. that productive teams are productive because of home office, while in fact they got home office because they were productive).",
+     "model": "Analysis of interdependencies between home office and employee productivity, which works both ways:\n• Home office → productivity (positive): employees save commuting time and experience fewer interruptions, so they can concentrate better.\n• Home office → productivity (negative): coordination becomes more difficult and informal knowledge exchange decreases.\n• Productivity → home office: according to the information, managers grant more flexibility to teams that deliver measurable results reliably and call teams with declining output back to the office (return-to-office policies).\n\nWhy a functional aim is meaningful: the relationship runs in both directions. A purely causal analysis (home office → productivity) would overlook that productivity itself determines how much home office is granted – productive teams may have home office because they are productive, not the other way round. Only the functional aim captures this interdependency completely.\n\nOptional: one sentence on why other aims fit less well (e.g. a description would only present home office models without analysing the relationship).",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "States the functional aim as interdependency in both directions (A ↔ B)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Positive effect of home office on productivity, with an argument",
        "p": 2
       },
       {
-       "c": "Defines the functional aim as mutual influence / interdependency (A ↔ B)",
+       "c": "Negative effect of home office on productivity, with an argument",
        "p": 2
       },
       {
-       "c": "Direction home office → productivity with arguments from the information",
+       "c": "Effect of productivity on home office arrangements, with an argument",
        "p": 2
       },
       {
-       "c": "Direction productivity → home office with arguments from the information",
+       "c": "Explains why this is meaningful (one-directional view incomplete / risk of a wrong conclusion)",
        "p": 1
       },
       {
-       "c": "Justification why function is more meaningful than a one-directional causal view",
+       "c": "Arguments linked to the information text, concise",
        "p": 1
       }
      ]
@@ -2318,26 +2403,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with a functional aim encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Home office arrangements\n   2.1 Definition and legal framework\n   2.2 Models of hybrid work\n3 Employee productivity\n   3.1 Definition of productivity\n   3.2 Measurement of productivity in service companies\n4 Interdependencies between home office and productivity\n   4.1 Impact of home office on productivity\n   4.2 Impact of productivity on home office arrangements\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Home office arrangements\n   2.1 Definition and legal framework\n   2.2 Models of hybrid work\n3 Employee productivity\n   3.1 Definition of productivity\n   3.2 Measurement of productivity in service companies\n4 Interdependencies between home office and productivity\n   4.1 Impact of home office on productivity\n   4.2 Impact of productivity on home office arrangements\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nAlternative in the style of the official sample solution: separate main chapters for each direction – 4 Impact of home office on productivity, 5 Impact of productivity on home office arrangements, 6 Conclusion.\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Both directions of influence are analysed – each in its own chapter or as subchapters of the core chapter",
+       "p": 2
       },
       {
-       "c": "Both directions analysed in the core chapter",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2362,27 +2443,27 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at an intention might be meaningful.",
-     "model": "Negative interpretation: The topic covers the digital euro as a retail central bank digital currency in the euro area and its role in European payments. Not covered are private cryptocurrencies and stablecoins (unless as a comparison point), digital currencies of other central banks (e.g. China), wholesale central bank money for interbank settlement and general monetary policy.\n\nPositive interpretation: description (how would the digital euro work?), causal connection (effect of the digital euro on bank deposits), intention (what does the Eurosystem intend to achieve?), function (how do the digital euro and private payment solutions influence each other?), comparison (digital euro vs. cash vs. cards).\n\nWhy intention: The problem setting asks for the purpose of the project – like the mini case ‘Printing money’, where the Bundestag asked for the purpose of the ECB’s action. An intention-directed aim investigates aims, purposes and motives (e.g. keeping public money usable in a digital economy as cash use declines, strengthening Europe’s independence from non-European payment providers, providing a free and pan-European means of payment) and the means/instruments to achieve them (legal tender status, offline payments, privacy, holding limits to protect bank funding). Answering the association’s confusion requires exactly this: not how the digital euro works technically, but why it is pursued and how its design serves these aims.",
+     "model": "Analysis of the intention behind the digital euro – what the Eurosystem wants to achieve and with which means:\n• Aim: keep public central bank money usable in a digital economy, because the use of cash is declining.\n• Aim: strengthen Europe’s independence, because a large share of card and mobile payments is processed by non-European card schemes and technology companies.\n• Aim: provide a free, pan-European means of payment available to everyone.\n• Means/instruments: legal tender status, offline payments, free basic use, a high level of privacy, holding limits per person (to avoid large outflows of bank deposits).\n\nWhy an intention-directed aim is meaningful: the consumer association asks for the purpose of the project – like the mini case ‘Printing money’, this is a question of intention (aims and the means to achieve them). A description of how the digital euro works technically, or a causal analysis of its effects on banks, would not answer why it is pursued.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Defines the aim ‘intention’ correctly (aims/purposes AND means/instruments)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Names at least two concrete aims of the digital euro from the information",
+       "p": 3
+      },
+      {
+       "c": "Names concrete means/instruments (design features) and links them to the aims",
        "p": 2
       },
       {
-       "c": "Defines intention correctly (aims, purposes, motives AND means/instruments)",
+       "c": "Links the decision to the context (‘clarify the purpose’)",
        "p": 2
       },
       {
-       "c": "Links the decision to the context (‘clarify the purpose’) – problem-based interpretation",
-       "p": 2
-      },
-      {
-       "c": "Gives concrete examples of intentions and instruments from the information",
-       "p": 2
+       "c": "Shows briefly why other aims would not answer the question",
+       "p": 1
       }
      ]
     },
@@ -2416,26 +2497,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at an intention encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Payments landscape in the euro area\n   2.1 Cash and cashless payment instruments\n   2.2 Role of non-European payment providers\n3 Concept of the digital euro\n   3.1 Central bank digital currencies\n   3.2 Design features of the digital euro\n4 Intentions of the digital euro\n   4.1 Purposes pursued by the Eurosystem\n   4.2 Design features as instruments to achieve the purposes\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Payments landscape in the euro area\n   2.1 Cash and cashless payment instruments\n   2.2 Role of non-European payment providers\n3 Concept of the digital euro\n   3.1 Central bank digital currencies\n   3.2 Design features of the digital euro\n4 Intentions of the digital euro\n   4.1 Purposes pursued by the Eurosystem\n   4.2 Design features as instruments to achieve the purposes\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Core chapter analyses the aims/purposes AND the means/instruments",
+       "p": 2
       },
       {
-       "c": "Core chapter analyses purposes AND means/instruments",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2459,27 +2536,31 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a comparison might be meaningful.",
-     "model": "Negative interpretation: The topic covers green bonds as an instrument to finance municipal infrastructure. Not covered are corporate green bonds, social bonds, the financing of federal or state budgets as such, private infrastructure investments (e.g. PPP projects, unless as a reference) and environmental policy in general.\n\nPositive interpretation: description (how does a municipal green bond issue work?), causal connection (effect of green labels on interest costs), intention (why do municipalities issue green bonds?), function (how do investor demand and municipal issuance influence each other?), comparison (green bond vs. municipal loan; target/actual comparison with the city’s objectives).\n\nWhy comparison: The treasurer faces a decision between two financing alternatives and explicitly asks for an appraisal – like the mini case ‘Clara Couture’. A comparison evaluates equalities, similarities and differences along defined criteria, e.g. interest costs (greenium), transaction and reporting costs, minimum size, speed and flexibility, investor base and reputational effects. It can also be a target/actual comparison: which alternative serves the city’s objectives (low costs, reliable funding, sustainability signal) better? Such an appraisal is directly decision-useful (materiality), whereas e.g. a pure description of green bonds would not answer the treasurer’s question.",
+     "model": "Analysis as a comparison of two financing alternatives against criteria (and against the city’s objectives):\n• Financing costs: a green bond may carry a lower interest rate (‘greenium’), but its size is debated.\n• Transaction effort and size: a bond needs a rating, documentation, reporting on the use of proceeds, often an external review and a minimum issue size; a municipal loan is quick to arrange and needs little documentation.\n• Investor base and signal: a green bond reaches sustainability-oriented investors and signals the city’s climate commitment; a loan depends on the bank relationship.\n\nWhy a comparison is meaningful: the treasurer has to choose between two alternatives and asks for an appraisal – like the mini case ‘Clara Couture’, the nature of the task is a comparison (alternatives against criteria, target vs. actual). A pure description of green bonds or a causal analysis of the greenium would not support this decision.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Defines comparison (alternatives against criteria / target vs. actual)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Cost criterion with arguments for both instruments",
        "p": 2
       },
       {
-       "c": "Defines comparison (equalities/similarities/differences, criteria, target/actual comparison)",
+       "c": "Effort/size criterion with arguments for both instruments",
        "p": 2
       },
       {
-       "c": "Links the decision to the context (two alternatives, ‘appraisal’ → comparison)",
+       "c": "At least one further criterion (investors, signal, flexibility)",
+       "p": 1
+      },
+      {
+       "c": "Links the decision to the context (choice between two alternatives, ‘appraisal’)",
        "p": 2
       },
       {
-       "c": "Names concrete comparison criteria from the information",
-       "p": 2
+       "c": "Shows briefly why other aims would be less useful",
+       "p": 1
       }
      ]
     },
@@ -2513,26 +2594,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at a comparison encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Municipal infrastructure financing in Germany\n   2.1 Financing needs and budget law requirements\n   2.2 Conventional municipal loans\n3 Green bonds\n   3.1 Definition and standards\n   3.2 Issuance process and requirements\n4 Comparison of green bonds and municipal loans\n   4.1 Comparison criteria\n   4.2 Comparative analysis\n   4.3 Appraisal for the financing of a tram line\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Municipal infrastructure financing in Germany\n   2.1 Financing needs and budget law requirements\n   2.2 Conventional municipal loans\n3 Green bonds\n   3.1 Definition and standards\n   3.2 Issuance process and requirements\n4 Comparison of green bonds and municipal loans\n   4.1 Comparison criteria\n   4.2 Comparative analysis\n   4.3 Appraisal for the financing of a tram line\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Both alternatives are presented before a comparison chapter with criteria",
+       "p": 2
       },
       {
-       "c": "Both alternatives presented, then a comparison chapter with criteria",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2556,22 +2633,22 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse which of the five potential aims is appropriate in the given problem setting and why an interpretation directed at a description might be meaningful.",
-     "model": "Negative interpretation: The topic covers due diligence obligations along supply chains as they concern German SMEs. Not covered are large companies as directly obliged parties (except as customers who pass on requirements), the EU directive on corporate sustainability due diligence, other countries and general sustainability reporting.\n\nPositive interpretation and selection: A causal connection (effect of the act on SMEs’ costs), an intention (purpose of the legislator), a function (interplay of customers’ requirements and suppliers’ processes) or a comparison (SMEs with vs. without obligations) would be conceivable. The problem setting, however, points to a description: the CEO asks the trainee to ‘lay out how’ the requirements reach the company and ‘which processes’ it has to set up – like the mini case ‘Sinking ships’, where a process had to be laid out.\n\nWhy description: A descriptive aim covers facts, structures and processes, agents and instruments – here: the scope of the act (facts), the way requirements are passed on via contracts, questionnaires and audits (process, institutional perspective: who passes on what to whom?) and the internal processes the SME needs (risk analysis, code of conduct, complaints procedure, documentation – technical perspective: how?). Since the company first needs a clear picture before it can evaluate costs or alternatives, a description is the most decision-useful aim in this situation.",
+     "model": "Which aim? A causal connection (effect of the act on SMEs’ costs), an intention (purpose of the legislator), a function (interplay of customers’ requirements and suppliers’ processes) or a comparison (SMEs with vs. without supplier audits) would be conceivable. The problem setting, however, points to a description: the CEO asks the trainee to ‘lay out how’ the requirements reach the company and ‘which processes’ it has to set up – like the mini case ‘Sinking ships’, where a process had to be laid out.\n\nWhat the description covers (facts, structures, processes, agents):\n• Facts and framework: the LkSG applies directly only to companies with at least 1,000 employees in Germany (3,000 until 2024); BAFA monitors compliance. The supplier with 180 employees is not directly obliged.\n• Process of passing on (institutional perspective – who passes what to whom?): large customers pass their obligations on via codes of conduct, supplier questionnaires, contractual clauses and audits.\n• Internal processes (technical perspective – how?): the SME needs its own risk analysis of its suppliers, a code of conduct, documentation to answer questionnaires and possibly a complaints channel.\n\nWhy description: the company first needs a clear picture of what is required before it can evaluate costs or alternatives. A causal analysis or comparison would answer questions the CEO has not asked.\n\nNote: As in the official sample solution, no negative interpretation is needed – the points come from choosing the aim and justifying it with the context and the information.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Considers the other aims and explains briefly why they are less suitable",
        "p": 2
       },
       {
-       "c": "Positive interpretation: considers the other aims and why they are less suitable",
-       "p": 2
-      },
-      {
-       "c": "Links the decision to the context (‘lay out how’, ‘which processes’ → description)",
+       "c": "Chooses description and links it to the context (‘lay out how’, ‘which processes’)",
        "p": 3
       },
       {
        "c": "Describes what a descriptive aim covers (facts, structures, processes, agents; perspectives)",
+       "p": 2
+      },
+      {
+       "c": "Applies it with concrete content from the information (threshold, ways of passing on, internal processes)",
        "p": 2
       },
       {
@@ -2610,26 +2687,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with a descriptive aim encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 The German Supply Chain Due Diligence Act\n   2.1 Scope of application\n   2.2 Due diligence obligations\n3 SMEs as suppliers of obliged companies\n   3.1 Characteristics of SMEs\n   3.2 Transfer of requirements via contracts, questionnaires and audits\n4 Implementation processes in SMEs\n   4.1 Risk analysis\n   4.2 Code of conduct and preventive measures\n   4.3 Complaints procedure and documentation\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 The German Supply Chain Due Diligence Act\n   2.1 Scope of application\n   2.2 Due diligence obligations\n3 SMEs as suppliers of obliged companies\n   3.1 Characteristics of SMEs\n   3.2 Transfer of requirements via contracts, questionnaires and audits\n4 Implementation processes in SMEs\n   4.1 Risk analysis\n   4.2 Code of conduct and preventive measures\n   4.3 Complaints procedure and documentation\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Structure follows the descriptive logic (legal framework → SMEs as suppliers → implementation processes)",
+       "p": 2
       },
       {
-       "c": "Structure follows the descriptive logic (framework → transfer process → processes in SMEs)",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2652,30 +2725,30 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a functional aim might be meaningful.",
-     "model": "Negative interpretation: The topic covers influencer marketing (cooperations with social media influencers) and consumers’ trust in brands. Not covered are e.g. classical advertising (TV, print), affiliate marketing without influencers, trust in companies as employers, and other brand metrics such as brand awareness or sales unless they relate to trust.\n\nPositive interpretation: description (forms of influencer cooperations), causal connection (effect of influencer campaigns on brand trust), intention (why do companies use influencers?), function (how do influencer marketing and brand trust influence each other?), comparison (influencer vs. classical advertising).\n\nWhy function: The information describes influences in both directions:\n• Influencer marketing → brand trust: credible influencers transfer their authenticity to the brand; too many cooperations or unclear labelling can reduce trust.\n• Brand trust → influencer marketing: trusted brands attract well-known influencers more easily; brand scandals damage the influencers involved and thereby the effectiveness of future campaigns.\nBecause the two elements are interdependent, a one-directional causal analysis would only capture half of the topic. The functional aim analyses the reciprocities and is decision-useful for marketing managers who select influencers and protect their brand.",
+     "model": "Analysis of interdependencies between influencer marketing and brand trust, which works both ways:\n• Influencer marketing → brand trust (positive): followers trust credible influencers and transfer this trust to the brands they present.\n• Influencer marketing → brand trust (negative): influencers who cooperate with too many brands lose credibility, which lowers trust in the advertised brands.\n• Brand trust → influencer marketing: brands with high consumer trust attract well-known influencers more easily; scandals of a brand damage the influencers who promoted it and thereby future campaigns.\n\nWhy a functional aim is meaningful: the influence runs in both directions. A causal analysis (influencer marketing → trust) would capture only half of the relationship. The functional aim analyses the reciprocities and helps marketing managers both to select influencers and to protect their brand.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "States the functional aim as interdependency in both directions (A ↔ B)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Positive effect of influencer marketing on brand trust, with an argument",
        "p": 2
       },
       {
-       "c": "Defines the functional aim as interdependency / reciprocity (A ↔ B)",
+       "c": "Negative effect of influencer marketing on brand trust, with an argument",
        "p": 2
       },
       {
-       "c": "Direction influencer marketing → brand trust with arguments",
+       "c": "Effect of brand trust on influencer marketing, with an argument",
        "p": 2
       },
       {
-       "c": "Direction brand trust → influencer marketing with arguments",
+       "c": "Explains why this is meaningful (one direction only would be incomplete)",
        "p": 1
       },
       {
-       "c": "Justification of meaningfulness (completeness, decision usefulness)",
+       "c": "Arguments linked to the information text, concise",
        "p": 1
       }
      ]
@@ -2710,26 +2783,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with a functional aim encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Influencer marketing\n   2.1 Definition and forms of cooperation\n   2.2 Legal requirements for labelling\n3 Brand trust\n   3.1 Definition of brand trust\n   3.2 Determinants and measurement of brand trust\n4 Interdependencies between influencer marketing and brand trust\n   4.1 Impact of influencer marketing on brand trust\n   4.2 Impact of brand trust on influencer marketing\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Influencer marketing\n   2.1 Definition and forms of cooperation\n   2.2 Legal requirements for labelling\n3 Brand trust\n   3.1 Definition of brand trust\n   3.2 Determinants and measurement of brand trust\n4 Interdependencies between influencer marketing and brand trust\n   4.1 Impact of influencer marketing on brand trust\n   4.2 Impact of brand trust on influencer marketing\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nAlternative in the style of the official sample solution: separate main chapters for each direction – 4 Impact of influencer marketing on brand trust, 5 Impact of brand trust on influencer marketing, 6 Conclusion.\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Both directions of influence are analysed – each in its own chapter or as subchapters of the core chapter",
+       "p": 2
       },
       {
-       "c": "Both directions analysed in the core chapter",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2753,27 +2822,31 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a causal connection might be meaningful.",
-     "model": "Negative interpretation: The topic covers the interest rate turnaround (rise in key and mortgage rates since 2022) and prices of residential real estate in Germany. Not covered are commercial real estate, rents (unless as a channel), other countries, the period before the turnaround and general monetary policy aims.\n\nPositive interpretation: description (how did rates and prices develop?), causal connection (effect of rising rates on prices), intention (why did the ECB raise rates?), function (mutual influence of rates and prices), comparison (prices before vs. after; Germany vs. other countries).\n\nWhy causal connection: The savings bank asks whether rising rates are ‘responsible for’ falling prices – a cause-effect question in one direction. There are plausible transmission mechanisms: higher mortgage rates increase financing costs and reduce the loan amount households can afford, so demand falls; higher yields on alternative investments raise the required return on real estate, which lowers values. The reverse direction (property prices → ECB interest rates) is hardly relevant, because the ECB sets rates mainly to achieve price stability for consumer prices; a functional aim would therefore not fit. A causal analysis also has to consider other causes (e.g. high construction costs, general uncertainty) to avoid a false conclusion.",
+     "model": "Analysis of a causal connection – rising interest rates (cause) → falling residential property prices (effect):\n• Financing channel: mortgage rates rose from about 1 % to about 4 %; financing costs increase and households can afford smaller loans, so demand and prices fall.\n• Alternative-investment channel: higher yields on safe investments raise the return investors require from real estate, which lowers property values.\n• Other causes to separate: high construction costs and general uncertainty may also affect prices – a causal analysis has to isolate the interest rate effect.\n\nWhy a causal connection is meaningful: the savings bank asks whether rising rates are ‘responsible for’ the price decline – a one-directional cause-effect question. The reverse direction (property prices → ECB key rates) is hardly relevant, because the ECB sets rates to fight consumer price inflation; a functional aim therefore does not fit.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Defines causal connection (cause → effect, one direction)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Explains the financing channel with figures or arguments from the information",
        "p": 2
       },
       {
-       "c": "Links the decision to the context (‘responsible for’ → cause and effect)",
+       "c": "Explains a second channel (e.g. alternative investments / required returns)",
        "p": 2
       },
       {
-       "c": "Explains at least one plausible transmission mechanism (cause → effect)",
+       "c": "Mentions other possible causes that must be separated",
+       "p": 1
+      },
+      {
+       "c": "Links the decision to the context (‘responsible for’)",
        "p": 2
       },
       {
-       "c": "Explains why the reverse direction is not central (→ not function) and/or mentions other possible causes",
-       "p": 2
+       "c": "Explains why the reverse direction is not central (→ not function)",
+       "p": 1
       }
      ]
     },
@@ -2807,26 +2880,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at a causal connection encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Interest rate turnaround in the euro area\n   2.1 Monetary policy of the ECB 2022–2023\n   2.2 Development of mortgage rates in Germany\n3 Residential real estate market in Germany\n   3.1 Market structure and price determinants\n   3.2 Price development since 2022\n4 Effect of rising interest rates on residential property prices\n   4.1 Transmission channels\n   4.2 Empirical analysis of the price development\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Interest rate turnaround in the euro area\n   2.1 Monetary policy of the ECB 2022–2023\n   2.2 Development of mortgage rates in Germany\n3 Residential real estate market in Germany\n   3.1 Market structure and price determinants\n   3.2 Price development since 2022\n4 Effect of rising interest rates on residential property prices\n   4.1 Transmission channels\n   4.2 Empirical analysis of the price development\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Structure follows the causal logic: cause chapter and effect chapter before the analysis of the causal connection",
+       "p": 2
       },
       {
-       "c": "Structure follows the causal logic: cause → effect → analysis of the causal connection",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2849,27 +2918,31 @@ window.ARAW_DATA = {
     {
      "pts": 10,
      "q": "Please analyse why an interpretation directed at a comparison might be meaningful.",
-     "model": "Negative interpretation: The topic covers the four-day working week as a working-time model in German companies. Not covered are general part-time work initiated by individual employees, working-time models in other countries (except as evidence), statutory working-time law in general and other HR instruments such as bonuses.\n\nPositive interpretation: description (which four-day week models exist?), causal connection (effect of a four-day week on productivity), intention (why do companies introduce it?), function (interplay of working time and labour shortage), comparison (four-day vs. five-day week; target/actual comparison with company objectives).\n\nWhy comparison: The board asks for an appraisal of two alternatives against three explicit objectives – a target/actual comparison as in the mini case ‘Clara Couture’. Comparison criteria follow directly from the objectives: employer attractiveness (applications, retention), productivity (output per employee) and personnel costs (cost neutrality). The pilot study can serve as evidence, but its limited representativeness must be considered. Only a comparison delivers the decision-useful answer the board needs.",
+     "model": "Analysis as a (target/actual) comparison of the four-day and the five-day week against the company’s three objectives:\n• Employer attractiveness: a four-day week can make it easier to recruit software developers; the current five-day week is the status quo with recruiting problems.\n• Productivity: the pilot study reports stable or slightly higher productivity – but the participating organisations were not representative, so the evidence has to be used critically.\n• Personnel costs: fewer hours with full pay may require additional staff, which endangers cost neutrality.\n\nWhy a comparison is meaningful: the board names three objectives and asks whether a four-day week serves them better than the current model – an appraisal like the mini case ‘Clara Couture’. Only a comparison against these criteria gives a decision-useful answer; a description of models or a causal analysis of a single effect would not.",
      "rubric": [
       {
-       "c": "Negative interpretation with plausible exclusions",
+       "c": "Defines comparison (alternatives against objectives, target vs. actual)",
        "p": 2
       },
       {
-       "c": "Positive interpretation naming the possible aims",
+       "c": "Criterion employer attractiveness with arguments",
        "p": 2
       },
       {
-       "c": "Identifies a target/actual comparison of alternatives against objectives",
+       "c": "Criterion productivity, using the pilot evidence critically",
+       "p": 2
+      },
+      {
+       "c": "Criterion personnel costs / cost neutrality with arguments",
        "p": 2
       },
       {
        "c": "Links the decision to the context (‘appraisal’, ‘better than’)",
-       "p": 2
+       "p": 1
       },
       {
-       "c": "Names comparison criteria derived from the objectives (and/or critically uses the pilot evidence)",
-       "p": 2
+       "c": "Shows briefly why other aims would be less useful",
+       "p": 1
       }
      ]
     },
@@ -2903,26 +2976,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at a comparison encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Working-time models\n   2.1 The five-day working week\n   2.2 Models of a four-day working week\n3 Objectives of the IT company\n   3.1 Employer attractiveness\n   3.2 Productivity and cost neutrality\n4 Comparison of the working-time models\n   4.1 Comparison criteria\n   4.2 Evidence from pilot projects\n   4.3 Appraisal for the IT company\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Working-time models\n   2.1 The five-day working week\n   2.2 Models of a four-day working week\n3 Objectives of the IT company\n   3.1 Employer attractiveness\n   3.2 Productivity and cost neutrality\n4 Comparison of the working-time models\n   4.1 Comparison criteria\n   4.2 Evidence from pilot projects\n   4.3 Appraisal for the IT company\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Alternatives and objectives are presented before a comparison chapter with criteria",
+       "p": 2
       },
       {
-       "c": "Alternatives and objectives presented before a comparison chapter with criteria",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -2945,15 +3014,19 @@ window.ARAW_DATA = {
    "tasks": [
     {
      "pts": 10,
-     "q": "Please perform a negative interpretation of the topic and analyse why an interpretation directed at an intention might be meaningful.",
-     "model": "Negative interpretation: The topic is limited to the EU’s CBAM and its relation to international trade. Not covered are other climate policy instruments such as national CO₂ pricing for transport and heating, sectors outside the CBAM scope, carbon border measures of non-EU countries, trade policy in general (e.g. customs duties unrelated to CO₂) and the technical details of emission measurement.\n\nWhy intention: The problem setting asks ‘what the EU is trying to achieve’ and ‘with which instruments’ – these are exactly the two components of an intention-directed aim: aims/purposes/motives and the means/instruments to achieve them (comparable to the mini case ‘Printing money’).\n• Intentions: preventing carbon leakage, protecting the effectiveness of the EU ETS, creating a level playing field for EU producers, encouraging cleaner production and carbon pricing in non-EU countries.\n• Instruments: carbon price on embedded emissions of imports, link to the EU ETS price, reporting obligations in the transitional phase, deduction of carbon prices paid abroad, limitation to emission-intensive sectors.\nUnderstanding the intention explains why the administrative burden exists and is a basis for any later evaluation (e.g. a comparison of effectiveness), which the association has not asked for yet.",
+     "q": "Please analyse why an interpretation directed at an intention might be meaningful.",
+     "model": "Analysis of the intention behind the CBAM – what the EU wants to achieve and with which instruments:\n• Intentions: prevent carbon leakage (production moving to countries with laxer climate policy, or EU products replaced by more carbon-intensive imports); protect the effectiveness of the EU ETS; create a level playing field for EU producers; encourage cleaner production and carbon pricing in non-EU countries.\n• Instruments: a carbon price on the emissions embedded in imports, linked to the EU ETS price; reporting obligations in the transitional phase from October 2023; deduction of a carbon price already paid in the country of origin; limitation to emission-intensive goods (cement, iron and steel, aluminium, fertilisers, electricity, hydrogen).\n\nWhy an intention-directed aim is meaningful: the importers ask ‘what the EU is trying to achieve’ and ‘with which instruments’ – exactly the two components of an intention (aims AND means), as in the mini case ‘Printing money’. Understanding the intention also explains why the administrative burden (reporting) exists. An evaluation of whether the CBAM works (causal connection or comparison) has not been asked for.",
      "rubric": [
       {
-       "c": "Negative interpretation with at least three plausible exclusions",
+       "c": "Defines intention correctly (aims/purposes/motives AND means/instruments)",
+       "p": 2
+      },
+      {
+       "c": "Names at least two concrete intentions of the CBAM from the information",
        "p": 3
       },
       {
-       "c": "Defines intention correctly (aims/purposes/motives AND means/instruments)",
+       "c": "Names concrete instruments and links them to the intentions",
        "p": 2
       },
       {
@@ -2961,11 +3034,7 @@ window.ARAW_DATA = {
        "p": 2
       },
       {
-       "c": "Names concrete intentions of the CBAM from the information",
-       "p": 2
-      },
-      {
-       "c": "Names concrete instruments of the CBAM from the information",
+       "c": "Shows briefly why other aims would not answer the question",
        "p": 1
       }
      ]
@@ -3000,26 +3069,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with an aim directed at an intention encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Carbon pricing in the European Union\n   2.1 EU emissions trading system\n   2.2 The problem of carbon leakage\n3 The carbon border adjustment mechanism\n   3.1 Scope and covered sectors\n   3.2 Transitional and definitive phase\n4 Intentions of the carbon border adjustment mechanism\n   4.1 Aims pursued by the European Union\n   4.2 Instruments to achieve the aims\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Carbon pricing in the European Union\n   2.1 EU emissions trading system\n   2.2 The problem of carbon leakage\n3 The carbon border adjustment mechanism\n   3.1 Scope and covered sectors\n   3.2 Transitional and definitive phase\n4 Intentions of the carbon border adjustment mechanism\n   4.1 Aims pursued by the European Union\n   4.2 Instruments to achieve the aims\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
-       "c": "Five to six main chapters",
-       "p": 1
+       "c": "Core chapter analyses the aims AND the instruments",
+       "p": 2
       },
       {
-       "c": "Core chapter analyses aims AND instruments",
-       "p": 1
-      },
-      {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -3042,28 +3107,28 @@ window.ARAW_DATA = {
    "tasks": [
     {
      "pts": 10,
-     "q": "Please explain the three process steps of the interpretation technique and apply them to the topic in the given context.",
-     "model": "The interpretation technique consists of three steps: (1) negative interpretation – what does the topic not cover?; (2) positive interpretation – which of the five aims (description, causal connection, intention, function, comparison) are possible?; (3) decision – selection of one aim (or a combination), coordinated with the instructor/thesis advisor. The candidate has the duty and the right to interpret the topic.\n\n(1) Negative interpretation: Not covered are online/e-commerce payments, peer-to-peer transfers between private persons, payments outside Germany, cryptocurrencies and cash logistics.\n(2) Positive interpretation: description (how do mobile payments work, who is involved?), causal connection (effect of the pandemic on mobile payment usage), intention (why do wallet providers offer mobile payment?), function (interplay of merchant acceptance and consumer usage), comparison (mobile vs. card payment; Germany vs. other countries).\n(3) Decision: The board asks to ‘lay out how’ mobile payments work and ‘who is involved’ – a description of a process (technical perspective: how?) and of agents (institutional perspective: who?), like the mini case ‘Sinking ships’. A description is the necessary basis for the bank’s later decision.",
+     "q": "Please analyse why an interpretation directed at a description might be meaningful.",
+     "model": "Analysis as a description – of the process (technical perspective: how?) and of the agents involved (institutional perspective: who?):\n• Process: the customer holds the smartphone or smartwatch to the terminal; the payment is initiated via near-field communication (NFC); the card number is replaced by a token; the payment is authorised via the card scheme and the issuer.\n• Agents: the customer’s bank or card issuer, the wallet provider (smartphone manufacturer or bank app), the card scheme, the merchant and its payment service provider.\n• Context: the market is growing (mobile payments tripled to 6 % of transactions between 2021 and 2023), while cash fell from 74 % to 51 % – this explains the bank’s interest.\n\nWhy a description is meaningful: the board asks the trainee to ‘lay out how’ mobile payments work and ‘who is involved’ – a description of a process and of agents, like the mini case ‘Sinking ships’. The description is the necessary basis for the bank’s later decision; a causal analysis (e.g. effect of the pandemic on usage) or a comparison of solutions has not been asked for yet.\n\nNote: The interpretation technique (negative interpretation, positive interpretation, decision) is still part of the slides and can be asked in Part A.",
      "rubric": [
       {
-       "c": "Names the three steps correctly (negative interpretation, positive interpretation, decision)",
+       "c": "Defines description (process: how? / agents: who?)",
        "p": 2
       },
       {
-       "c": "Mentions coordination with advisor / duty and right of the candidate",
-       "p": 1
-      },
-      {
-       "c": "Applies the negative interpretation with plausible exclusions",
+       "c": "Describes the technical process with details from the information (NFC, token)",
        "p": 2
       },
       {
-       "c": "Applies the positive interpretation to the topic (several aims)",
+       "c": "Names the agents involved",
        "p": 2
       },
       {
-       "c": "Decision for description justified by the context (‘lay out how’, ‘who is involved’)",
+       "c": "Links the decision to the context (‘lay out how’, ‘who is involved’)",
        "p": 3
+      },
+      {
+       "c": "Shows briefly why other aims would not answer the question",
+       "p": 1
       }
      ]
     },
@@ -3097,26 +3162,22 @@ window.ARAW_DATA = {
     {
      "pts": 5,
      "q": "Please provide a draft outline for a term paper with a descriptive aim encompassing five to six main chapters (including introduction and conclusion).",
-     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Payment behaviour in Germany\n   2.1 Cash and card payments\n   2.2 Development of mobile payment\n3 Technical process of mobile payment\n   3.1 Near-field communication and tokenisation\n   3.2 Transaction process at the point of sale\n4 Market participants in mobile payment\n   4.1 Wallet providers and banks\n   4.2 Card schemes and payment service providers\n   4.3 Merchants\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook",
+     "model": "1 Introduction\n   1.1 Research problem\n   1.2 Research method\n   1.3 Course of investigation\n2 Payment behaviour in Germany\n   2.1 Cash and card payments\n   2.2 Development of mobile payment\n3 Technical process of mobile payment\n   3.1 Near-field communication and tokenisation\n   3.2 Transaction process at the point of sale\n4 Market participants in mobile payment\n   4.1 Wallet providers and banks\n   4.2 Card schemes and payment service providers\n   4.3 Merchants\n5 Conclusion\n   5.1 Summary\n   5.2 Critical acclaim\n   5.3 Outlook\n\nNote on subchapters: the official sample solution lists main chapters only. Subchapters (e.g. 1.1 Research problem, 1.2 Course of investigation; 5.1 Summary, 5.2 Critical acclaim, 5.3 Outlook) are not required, but they make the logic of your outline clearer if you have time.",
      "rubric": [
       {
-       "c": "Introduction first (research problem, [method], course of investigation)",
+       "c": "Introduction is the first and conclusion the last chapter",
        "p": 1
       },
       {
-       "c": "Conclusion last (summary, critical acclaim, outlook)",
-       "p": 1
-      },
-      {
-       "c": "Five to six main chapters",
+       "c": "Each element of the topic gets its own chapter before the core chapter",
        "p": 1
       },
       {
        "c": "Structure follows the descriptive logic (context → process → agents)",
-       "p": 1
+       "p": 2
       },
       {
-       "c": "Formally correct decadal numbering",
+       "c": "Five to six main chapters, formally correct decadal numbering",
        "p": 1
       }
      ]
@@ -5050,7 +5111,7 @@ window.ARAW_DATA = {
        "‘Risk management with container freight derivatives (CFD)’"
       ]
      ],
-     "tip": "In Part C, always justify your aim with words from the information text or the task (e.g. ‘responsible for’, ‘purpose’, ‘interdependencies’, ‘appraisal’)."
+     "tip": "In Part C, always justify your aim with words from the information text or the task (e.g. ‘responsible for’, ‘purpose’, ‘interdependencies’, ‘appraisal’). Official sample solution: when asked why an aim is meaningful, go straight to concrete arguments for that aim (e.g. both directions of influence for a function) – a negative/positive interpretation is not required unless the task asks for it."
     }
    ]
   },
@@ -5438,5 +5499,19 @@ window.ARAW_DATA = {
  ],
 
  // ---------- Which concept cards are shown after which task ----------
- conceptMap: {"sets":{"A1-01":["c1_terms"],"A1-02":["c1_terms"],"A1-03":["c1_philo"],"A1-04":["c1_philo"],"A1-05":["c1_philo","c1_frame"],"S-A1":["c2_accuracy"],"S-A2":["c2_compl_clar"],"A2-01":["c2_accuracy","c2_compl_clar","c2_comp_mat"],"A2-02":["c2_accuracy"],"A2-03":["c2_accuracy"],"A2-04":["c2_accuracy"],"A2-05":["c2_compl_clar"],"A2-06":["c2_comp_mat"],"A2-07":["c2_compl_clar"],"A2-08":["c2_comp_mat","c2_accuracy"],"S-A3":["c3_reasoning"],"S-A4":["c3_syllogism"],"S-A5":["c3_falsification"],"A3-01":["c3_reasoning"],"A3-02":["c3_syllogism"],"A3-03":["c3_syllogism","c3_falsification"],"A3-04":["c3_falsification"],"A3-05":["c3_falsification"],"A3-06":["c3_falsification"],"A3-07":["c3_syllogism"],"A3-08":["c3_syllogism"],"A4-01":["c4_questions"],"A4-02":["c4_questions"],"A4-03":["c4_questions"],"A4-04":["c4_hypotheses"],"A4-05":["c4_hypotheses"],"A4-06":["c4_hypotheses"],"A4-07":["c4_hypotheses"],"A4-08":["c4_hypotheses"],"A4-09":["c4_hypotheses","c4_questions"],"A4-10":["c4_approaches"],"A4-11":["c4_approaches"],"A4-12":["c4_styles"],"A4-13":["c4_styles"],"A4-14":["c4_styles"],"A4-15":["c4_styles"],"A5-01":["c5_topic"],"A5-02":["c5_topic"],"A5-03":["c5_topic"],"A5-04":["c5_topic"],"A5-05":["c5_topic"],"A6-01":["c6_literature"],"A6-02":["c6_literature"],"A6-03":["c6_appraisal"],"A6-04":["c6_appraisal"],"A6-05":["c6_appraisal"],"A6-06":["c6_appraisal"],"A6-07":["c6_search"],"A6-08":["c6_search"],"A6-09":["c6_literature","c4_approaches"],"A7-01":["c7_structure"],"A7-02":["c7_structure"],"A7-03":["c7_structure"],"A7-04":["c7_structure"],"A7-05":["c7_cover_abstract"],"A7-06":["c7_cover_abstract"],"A7-07":["c7_cover_abstract"],"A7-08":["c7_outline"],"A7-09":["c7_outline"],"A7-10":["c7_outline"],"A7-11":["c7_outline"],"A7-12":["c7_directories"],"A7-13":["c7_directories"],"A7-14":["c7_directories"],"A7-15":["c7_directories"],"A7-16":["c7_annex"],"A7-17":["c7_annex"],"A7-18":["c7_annex"],"A7-19":["c7_annex"],"A7-20":["c7_directories"],"A8-01":["c8_technique"],"A8-02":["c8_technique"],"A8-03":["c8_technique","c8_aims"],"A8-04":["c8_aims"],"A8-05":["c8_aims"],"A8-06":["c8_aims"],"A8-07":["c8_aims"],"A8-08":["c8_aims"],"A8-09":["c8_cases","c8_aims"],"A8-10":["c8_cases","c8_aims"],"A8-11":["c8_technique","c8_cases"],"A8-12":["c8_technique"],"A8-13":["c8_cases","c8_aims"],"A9-01":["c9_problem"],"A9-02":["c9_problem"],"A9-03":["c9_problem"],"A9-04":["c9_problem"],"A9-05":["c9_problem"],"A9-06":["c9_outline"],"A9-07":["c9_outline"],"A9-08":["c9_outline"],"A9-09":["c9_outline"],"A9-10":["c9_conclusion"],"A9-11":["c9_conclusion"],"A9-12":["c9_conclusion"],"A9-13":["c9_conclusion"],"A9-14":["c9_outline"]},"pages":{"B00":["c7_cover_abstract","c2_accuracy","c2_compl_clar"],"B01":["c7_outline","c7_structure","c9_outline"],"B02":["c9_problem","c4_questions","c2_compl_clar","c6_appraisal"],"B03":["c9_outline","c8_aims","c3_falsification","c4_hypotheses"],"B04":["c9_conclusion","c3_reasoning","c7_outline"],"B05":["c7_directories","c7_outline","c2_accuracy"],"B06":["c7_directories","c7_annex","c6_appraisal"],"B07":["c7_cover_abstract","c2_accuracy"],"B08":["c3_falsification","c3_reasoning","c4_hypotheses","c2_accuracy"],"B09":["c4_approaches","c4_styles","c4_questions","c3_falsification"],"B10":["c7_cover_abstract","c2_accuracy","c3_falsification"]},"cases":{"default":["c8_aims","c8_technique","c8_cases","c4_questions","c9_outline"],"C01":["c8_aims","c8_technique","c4_questions","c4_hypotheses","c9_outline"],"C07":["c8_aims","c8_technique","c4_questions","c4_hypotheses","c9_outline"]}}
+ conceptMap: {"sets":{"A1-01":["c1_terms"],"A1-02":["c1_terms"],"A1-03":["c1_philo"],"A1-04":["c1_philo"],"A1-05":["c1_philo","c1_frame"],"S-A1":["c2_accuracy"],"S-A2":["c2_compl_clar"],"A2-01":["c2_accuracy","c2_compl_clar","c2_comp_mat"],"A2-02":["c2_accuracy"],"A2-03":["c2_accuracy"],"A2-04":["c2_accuracy"],"A2-05":["c2_compl_clar"],"A2-06":["c2_comp_mat"],"A2-07":["c2_compl_clar"],"A2-08":["c2_comp_mat","c2_accuracy"],"S-A3":["c3_reasoning"],"S-A4":["c3_syllogism"],"S-A5":["c3_falsification"],"A3-01":["c3_reasoning"],"A3-02":["c3_syllogism"],"A3-03":["c3_syllogism","c3_falsification"],"A3-04":["c3_falsification"],"A3-05":["c3_falsification"],"A3-06":["c3_falsification"],"A3-07":["c3_syllogism"],"A3-08":["c3_syllogism"],"A4-01":["c4_questions"],"A4-02":["c4_questions"],"A4-03":["c4_questions"],"A4-04":["c4_hypotheses"],"A4-05":["c4_hypotheses"],"A4-06":["c4_hypotheses"],"A4-07":["c4_hypotheses"],"A4-08":["c4_hypotheses"],"A4-09":["c4_hypotheses","c4_questions"],"A4-10":["c4_approaches"],"A4-11":["c4_approaches"],"A4-12":["c4_styles"],"A4-13":["c4_styles"],"A4-14":["c4_styles"],"A4-15":["c4_styles"],"A5-01":["c5_topic"],"A5-02":["c5_topic"],"A5-03":["c5_topic"],"A5-04":["c5_topic"],"A5-05":["c5_topic"],"A6-01":["c6_literature"],"A6-02":["c6_literature"],"A6-03":["c6_appraisal"],"A6-04":["c6_appraisal"],"A6-05":["c6_appraisal"],"A6-06":["c6_appraisal"],"A6-07":["c6_search"],"A6-08":["c6_search"],"A6-09":["c6_literature","c4_approaches"],"A7-01":["c7_structure"],"A7-02":["c7_structure"],"A7-03":["c7_structure"],"A7-04":["c7_structure"],"A7-05":["c7_cover_abstract"],"A7-06":["c7_cover_abstract"],"A7-07":["c7_cover_abstract"],"A7-08":["c7_outline"],"A7-09":["c7_outline"],"A7-10":["c7_outline"],"A7-11":["c7_outline"],"A7-12":["c7_directories"],"A7-13":["c7_directories"],"A7-14":["c7_directories"],"A7-15":["c7_directories"],"A7-16":["c7_annex"],"A7-17":["c7_annex"],"A7-18":["c7_annex"],"A7-19":["c7_annex"],"A7-20":["c7_directories"],"A8-01":["c8_technique"],"A8-02":["c8_technique"],"A8-03":["c8_technique","c8_aims"],"A8-04":["c8_aims"],"A8-05":["c8_aims"],"A8-06":["c8_aims"],"A8-07":["c8_aims"],"A8-08":["c8_aims"],"A8-09":["c8_cases","c8_aims"],"A8-10":["c8_cases","c8_aims"],"A8-11":["c8_technique","c8_cases"],"A8-12":["c8_technique"],"A8-13":["c8_cases","c8_aims"],"A9-01":["c9_problem"],"A9-02":["c9_problem"],"A9-03":["c9_problem"],"A9-04":["c9_problem"],"A9-05":["c9_problem"],"A9-06":["c9_outline"],"A9-07":["c9_outline"],"A9-08":["c9_outline"],"A9-09":["c9_outline"],"A9-10":["c9_conclusion"],"A9-11":["c9_conclusion"],"A9-12":["c9_conclusion"],"A9-13":["c9_conclusion"],"A9-14":["c9_outline"]},"pages":{"B00":["c7_cover_abstract","c2_accuracy","c2_compl_clar"],"B01":["c7_outline","c7_structure","c9_outline"],"B02":["c9_problem","c4_questions","c2_compl_clar","c6_appraisal"],"B03":["c9_outline","c8_aims","c3_falsification","c4_hypotheses"],"B04":["c9_conclusion","c3_reasoning","c7_outline"],"B05":["c7_directories","c7_outline","c2_accuracy"],"B06":["c7_directories","c7_annex","c6_appraisal"],"B07":["c7_cover_abstract","c2_accuracy"],"B08":["c3_falsification","c3_reasoning","c4_hypotheses","c2_accuracy"],"B09":["c4_approaches","c4_styles","c4_questions","c3_falsification"],"B10":["c7_cover_abstract","c2_accuracy","c3_falsification"]},"cases":{"default":["c8_aims","c8_technique","c8_cases","c4_questions","c9_outline"],"C01":["c8_aims","c8_technique","c4_questions","c4_hypotheses","c9_outline"],"C07":["c8_aims","c8_technique","c4_questions","c4_hypotheses","c9_outline"]}},
+
+ // ---------- Notes from the lecture with the official sample solution ----------
+ lectureNotes: {
+  "date": "20 November 2026",
+  "items": [
+   "To pass, you need to know chapters 4, 7, 8 and 9. General knowledge of chapters 1–9 is also tested.",
+   "The written test has the same structure as the sample exam: Part A (25 points), Part B (10 points), Part C (25 points).",
+   "Part A: explaining your tick is optional and not recommended in general. If a statement can be misunderstood, a correct explanation can still earn the point.",
+   "Part B: there will be more than five mistakes – mark five different ones and explain their nature. Only point out a mistake if you are sure it is one.",
+   "Part B: each different grammar mistake counts separately; the same mistake repeated (e.g. five times the same semicolon error) counts only once. The professor: “The exercise shouldn’t be too much of a brain twister.”",
+   "Part C: do not just memorise and repeat the slides – put things into the context of the aim. Have a look at the mini cases.",
+   "You do not have to know everything 100 %, but you need a general understanding of chapters 1–9."
+  ]
+ }
 };

@@ -140,6 +140,11 @@ textarea:focus{border-color:var(--ink);outline:none}
 .paper .h1{font-weight:700;font-size:18px;margin:6px 0 10px}
 .paper .h2{font-weight:700;font-size:16.5px;margin:16px 0 6px}
 .paper p{margin:0 0 12px;text-align:justify}
+.paper p.left{text-align:left}
+.offb{display:inline-block;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:9px;margin-left:8px;vertical-align:2px}
+.offb.o{background:#DCE8F7;color:#1D4C86}.offb.g{background:#EFE6D2;color:#6A5016}.offb.n{background:#ECECEC;color:#555}
+.lnotes{margin-top:14px}details.lnotes{padding:12px 18px;margin:16px 0}details.lnotes summary{cursor:pointer}.lnotes li{margin:4px 0}
+.btips{font-size:14px;margin:6px 0 10px;padding:10px 14px 10px 30px;background:var(--ink-soft);border-radius:8px}.btips li{margin:2px 0}
 .paper .note{font-style:italic;color:#555;margin-bottom:4px}
 .paper .toc{display:flex;gap:8px}
 .paper .toc .t{flex:0 1 auto}
@@ -420,7 +425,7 @@ function tokenize(page){
       case 'cap': return `<p class="cap">${line(b.x)}</p>`;
       case 'toc': return `<div class="toc" style="padding-left:${(b.i || 0) * 28}px"><span class="t">${line(b.x)}</span>${b.pg ? '<span class="lead"></span><span>' + line(b.pg) + '</span>' : ''}</div>`;
       case 'table': return `<table>${b.rows.map(r => '<tr>' + r.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('')}</table>`;
-      default: return `<p>${line(b.x)}</p>`;
+      default: return `<p${b.left ? ' class="left"' : ''}>${line(b.x)}</p>`;
     }
   }).join('');
   return (pageCache[page.id] = {html, wordErr, wordText});
@@ -578,6 +583,7 @@ function viewHome(){
     <div><b>${S.attempts.length}</b><span>attempts in total</span></div>
     <div><b>${avg}</b><span>average score out of 60</span></div>
   </div>
+  ${D.lectureNotes ? `<details class="sheet lnotes"><summary><b>Notes from the lecture (${esc(D.lectureNotes.date)})</b>: what the professor said about the written test</summary><ul>${D.lectureNotes.items.map(n => `<li>${esc(n)}</li>`).join('')}</ul></details>` : ''}
   <div class="section"><h2>Official sample exam</h2><div class="exlist">${D.exams.filter(e => e.sample).map(row).join('')}</div></div>
   <div class="section"><h2>Mock exams 1–10</h2><div class="exlist">${mocks.map(row).join('')}</div></div>
   <div class="section"><h2>New exams from the question pool</h2>
@@ -700,6 +706,13 @@ function aSetHtml(t, id, k, checked, canCheck, ctx){ // canCheck: show the per-b
 }
 
 /* ----- Part B ----- */
+function offBadge(o){
+  if (o === undefined) return '';
+  if (o === true) return '<span class="offb o">Official solution</span>';
+  if (o === 'type') return '<span class="offb o">Type marked in the official solution</span>';
+  if (o === 'grammar') return '<span class="offb g">Grammar (counts per lecture)</span>';
+  return '<span class="offb n">Not in official solution</span>';
+}
 function partB(t){
   const page = PAGES[t.def.partB], tok = tokenize(page), checked = t.done || t.b.checked;
   const res = checked ? bResult(t) : null;
@@ -716,16 +729,18 @@ function partB(t){
         const f = res.found.has(e), txt = Object.keys(tok.wordErr).filter(k => tok.wordErr[k] === e).map(k => tok.wordText[k]).join(' ');
         const yours = f ? (t.b.notes[t.b.marks[firstMark[e]]] || '') : '';
         return `<div class="berr"><div class="st ${f ? 'f' : 'm'}">${f ? 'Found (fn. ' + (firstMark[e] + 1) + ')' : 'Missed'}</div><div>
-          <h4>${esc(er.label)}</h4><div class="txt">“${esc(txt.length > 140 ? txt.slice(0, 140) + '…' : txt)}”, ${er.type} mistake, chapter ${er.ch}</div>
+          <h4>${esc(er.label)}${offBadge(er.off)}</h4><div class="txt">“${esc(txt.length > 140 ? txt.slice(0, 140) + '…' : txt)}”, ${er.type} mistake, chapter ${er.ch}</div>
           <details class="why"${f ? '' : ' open'}><summary><span class="sh">Why is this a mistake?</span><span class="hd">Hide explanation</span></summary><div class="expl ${f ? 'ok' : 'bad'}">${esc(er.expl)}</div></details>
           ${f && yours ? `<div class="yours">Your explanation: ${esc(yours)}</div>` : ''}
           ${f ? `<div class="grade"><button class="${(t.b.grades[e] || 1) === 1 ? 'on' : ''}" data-act="bgrade" data-e="${e}" data-v="1">1 point: located only</button><button class="${t.b.grades[e] === 2 ? 'on' : ''}" data-act="bgrade" data-e="${e}" data-v="2">2 points: explained correctly</button></div>` : ''}
         </div></div>`;
       }).join('')}
+      ${page.notes ? `<div class="lnotes"><h4 style="margin:10px 0 4px;font-size:15px">Notes from the lecture</h4><ul>${page.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>` : ''}
       <div class="ascore"><span>Mistakes found <b>${res.found.size} / ${Object.keys(page.errors).length}</b></span><span>Marks on correct text <b>${res.falseMarks.length}</b></span><span class="tot">Points ${res.pts} / 10</span></div></div>`;
   }
   return `<div class="parthead"><h2>Part B: Identifying mistakes</h2><span class="pts">10 points</span></div>
   <p class="rules">${esc(page.context)} ${checked ? '' : 'Click on a word to mark it with a footnote, then explain the mistake below the page. Click a marked word again to remove the mark.'}</p>
+  ${checked ? '' : `<ul class="btips"><li>There are more than five mistakes. Mark five <b>different</b> ones and explain the nature of each mistake.</li><li>Only point out a mistake if you are sure it is one.</li><li>Each different grammar mistake counts separately; the same mistake repeated counts only once.</li></ul>`}
   ${checked ? `<div class="legend"><span><i style="background:#CDEBD7"></i>mistake you found</span><span><i style="background:#F6D3CF"></i>mistake you missed</span><span><i style="background:#ECECEC"></i>your mark on correct text</span></div>` : ''}
   <div class="paper ${checked ? '' : 'live'}" id="paper" data-page="${page.id}">${tok.html}</div>
   <div class="sheet notes"><h3 style="font-size:17px">Your explanations</h3>
